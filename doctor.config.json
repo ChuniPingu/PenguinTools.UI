@@ -1,0 +1,12 @@
+{
+  "$schema": "https://react.doctor/schema/config.json",
+  "ignore": {
+    "files": ["dist/**", "src-tauri/**", "external/**", "node_modules/**", "src/components/ui/**"],
+    "overrides": [
+      {
+        "files": ["src/components/layout/TitleBar.tsx"],
+        "rules": ["react-doctor/no-static-element-interactions"]
+      }
+    ]
+  }
+}

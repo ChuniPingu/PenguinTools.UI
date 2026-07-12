@@ -1,0 +1,3 @@
+[submodule "external/PenguinTools"]
+	path = external/PenguinTools
+	url = https://github.com/Foahh/PenguinTools.git

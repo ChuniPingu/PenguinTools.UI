@@ -1,0 +1,164 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to rebuild (e.g. v2.0.1). Leave empty to use the pushed tag.
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - name: Resolve tag
+        id: meta
+        shell: bash
+        run: |
+          if [ -n "${{ inputs.tag }}" ]; then
+            TAG="${{ inputs.tag }}"
+          else
+            TAG="${GITHUB_REF_NAME}"
+          fi
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Tag '$TAG' must look like vX.Y.Z"
+            exit 1
+          fi
+          VERSION="${TAG#v}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.meta.outputs.tag }}
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./src-tauri -> target"
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Install LLVM
+        shell: pwsh
+        run: |
+          choco install llvm -y --no-progress
+          echo "C:\Program Files\LLVM\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Setup vcpkg
+        shell: pwsh
+        run: |
+          git clone --depth 1 https://github.com/microsoft/vcpkg.git C:\vcpkg
+          & C:\vcpkg\bootstrap-vcpkg.bat -disableMetrics
+          "VCPKG_ROOT=C:\vcpkg" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "LIBCLANG_PATH=C:\Program Files\LLVM\bin" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Install JS dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build Tauri app
+        uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          tagName: ${{ steps.meta.outputs.tag }}
+          releaseName: PenguinTools ${{ steps.meta.outputs.tag }}
+          releaseBody: |
+            PenguinTools ${{ steps.meta.outputs.tag }}
+
+            Installer and updater artifacts are also mirrored to Cloudflare R2.
+          releaseDraft: false
+          prerelease: false
+          updaterJsonPreferNsis: true
+          uploadUpdaterJson: true
+
+      - name: Download updater JSON from GitHub Release
+        uses: robinraju/release-downloader@v1
+        with:
+          tag: ${{ steps.meta.outputs.tag }}
+          fileName: "latest.json"
+          out-file-path: release-assets
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup AWS CLI for R2
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          aws-region: auto
+
+      - name: Upload artifacts and latest.json to R2
+        shell: bash
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_PUBLIC_BASE: ${{ secrets.R2_PUBLIC_BASE }}
+          TAG: ${{ steps.meta.outputs.tag }}
+        run: |
+          set -euo pipefail
+          ENDPOINT="https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
+          PUBLIC_BASE="${R2_PUBLIC_BASE%/}"
+          NSIS_DIR="src-tauri/target/release/bundle/nsis"
+
+          if [ ! -d "$NSIS_DIR" ]; then
+            echo "NSIS bundle directory not found at $NSIS_DIR"
+            exit 1
+          fi
+
+          shopt -s nullglob
+          for file in "$NSIS_DIR"/*; do
+            name="$(basename "$file")"
+            aws s3 cp "$file" "s3://${R2_BUCKET}/${TAG}/${name}" --endpoint-url "$ENDPOINT"
+          done
+
+          if [ ! -f release-assets/latest.json ]; then
+            echo "latest.json was not produced by tauri-action"
+            exit 1
+          fi
+
+          mkdir -p r2-upload
+          python - <<'PY'
+          import json, os, pathlib
+          tag = os.environ["TAG"]
+          public_base = os.environ["R2_PUBLIC_BASE"].rstrip("/")
+          data = json.loads(pathlib.Path("release-assets/latest.json").read_text(encoding="utf-8"))
+          for meta in (data.get("platforms") or {}).values():
+              url = meta.get("url") or ""
+              name = url.rstrip("/").split("/")[-1]
+              if name:
+                  meta["url"] = f"{public_base}/{tag}/{name}"
+          out = pathlib.Path("r2-upload/latest.json")
+          out.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+          print(out.read_text(encoding="utf-8"))
+          PY
+
+          aws s3 cp r2-upload/latest.json "s3://${R2_BUCKET}/latest.json" \
+            --endpoint-url "$ENDPOINT" \
+            --content-type application/json \
+            --cache-control "no-cache"

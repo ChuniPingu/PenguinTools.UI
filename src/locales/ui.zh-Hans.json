@@ -1,0 +1,669 @@
+{
+  "app": {
+    "name": "企鹅工具箱"
+  },
+  "common": {
+    "emptyValue": "—",
+    "yes": "是",
+    "no": "否",
+    "loading": "加载中…",
+    "unknown": "未知",
+    "more": "更多",
+    "breadcrumb": "面包屑导航",
+    "actions": {
+      "convert": "转换",
+      "extract": "提取",
+      "generate": "生成",
+      "help": "帮助",
+      "reload": "重载",
+      "browse": "浏览",
+      "cancel": "取消",
+      "close": "关闭",
+      "skip": "跳过"
+    },
+    "sections": {
+      "source": "来源",
+      "settings": "设置",
+      "properties": "属性"
+    },
+    "fields": {
+      "chartFile": "谱面文件"
+    },
+    "media": {
+      "play": "播放",
+      "pause": "暂停"
+    }
+  },
+  "filePicker": {
+    "placeholder": {
+      "file": "选择文件…",
+      "folder": "选择文件夹…"
+    },
+    "clearAriaLabel": "清除“{label}”",
+    "filters": {
+      "chart": "谱面文件",
+      "c2s": "C2S 谱面",
+      "image": "图片文件",
+      "audio": "音频文件",
+      "criAudio": "CRI 音频",
+      "musicXml": "Music.xml",
+      "jacket": "封面文件",
+      "afb": "AFB 文件"
+    }
+  },
+  "cli": {
+    "completedWith": "已完成，含 {summary}",
+    "tauriOnly": "CLI 命令仅在 Tauri 应用中可用",
+    "cancelled": "已取消 CLI 操作",
+    "exitedWithCode": "CLI 以退出码 {code} 结束",
+    "summary": {
+      "errors": "{count} 个错误",
+      "warnings": "{count} 个警告",
+      "info": "{count} 条信息"
+    }
+  },
+  "nav": {
+    "groups": {
+      "export": "导出",
+      "convert": "转换",
+      "extract": "提取",
+      "system": "系统"
+    },
+    "pages": {
+      "option": "导出曲包",
+      "song": "导出乐曲",
+      "chart": "转换谱面",
+      "jacket": "转换封面",
+      "audio": "转换音源",
+      "stage": "转换背景",
+      "extractMusic": "提取乐曲",
+      "extractChart": "提取谱面",
+      "extractAudio": "提取音源",
+      "extractStage": "提取背景",
+      "misc": "设置"
+    }
+  },
+  "groups": {
+    "jobSetup": "基本设置",
+    "outputs": "资源类型",
+    "overrides": "手动指定",
+    "generatedFiles": "生成 XML",
+    "advanced": "高级",
+    "option": "Option 设置",
+    "conversion": "转换",
+    "eventXml": "Event XML",
+    "releaseTagXml": "Release Tag XML",
+    "song": "乐曲",
+    "chart": "谱面",
+    "bgm": "音源预览",
+    "sync": "同步与时序",
+    "encoding": "编码",
+    "misc": "设置",
+    "display": "素材",
+    "background": "背景",
+    "effects": "特效",
+    "output": "输出",
+    "metadata": "谱面信息"
+  },
+  "groupDescriptions": {
+    "jobSetup": "设置 Option，并指定源文件的处理方式",
+    "outputs": "选择本次转换要生成的资源类型",
+    "generatedFiles": "选择是否同时生成 Event.xml 和 ReleaseTag.xml",
+    "option": "设置 Option 名称和谱面扫描顺序",
+    "conversion": "选择本次导出要生成的资源",
+    "eventXml": "生成 Event.xml 时，在此设置谱面解锁事件",
+    "releaseTagXml": "生成 ReleaseTag.xml 时，在此设置分类信息",
+    "encoding": "设置 HCA 音源的加密方式",
+    "misc": "其他转换设置",
+    "metadata": "确认将用于生成歌曲数据的谱面信息"
+  },
+  "properties": {
+    "songId": {
+      "label": "歌曲 ID",
+      "description": "从谱面属性中读取、供游戏使用的歌曲 ID"
+    },
+    "displayBpm": {
+      "label": "显示 BPM",
+      "description": "选曲界面中显示的 BPM"
+    },
+    "chartDiscovery": {
+      "label": "谱面格式",
+      "description": "按顺序扫描谱面格式；歌曲 ID 和难度相同时，排在前面的格式优先"
+    },
+    "genre": {
+      "label": "流派",
+      "description": "歌曲在游戏中的分类"
+    },
+    "sortName": {
+      "label": "排序名称",
+      "description": "歌曲在游戏中的排序名称"
+    },
+    "releaseDate": {
+      "label": "发布日期",
+      "description": "写入歌曲数据的发布日期（yyyy-MM-dd）"
+    },
+    "mainTil": {
+      "label": "基准时间轴",
+      "description": "谱面使用的基准时间轴 ID"
+    },
+    "stage": {
+      "label": "背景类型",
+      "description": "游戏中使用的背景。也可在谱面注释中添加 #meta stage [StringID] 进行设置"
+    },
+    "releaseTag": {
+      "label": "ReleaseTag",
+      "description": "歌曲所属的 ReleaseTag 分类"
+    },
+    "unlockEvent": {
+      "label": "谱面解锁事件 ID",
+      "description": "用于解锁 ULTIMA 或 WORLD'S END 谱面的事件 ID"
+    },
+    "previewStart": {
+      "label": "预览开始（秒）",
+      "description": "选曲时音源预览的开始时间"
+    },
+    "previewStop": {
+      "label": "预览结束（秒）",
+      "description": "选曲时音源预览的结束时间"
+    },
+    "manualOffset": {
+      "label": "手动偏移（秒）",
+      "description": "手动设置的音源偏移量。正值表示延后播放，负值表示提前播放"
+    },
+    "realOffset": {
+      "label": "实际偏移（秒）",
+      "description": "根据开头空白小节和手动偏移计算出的最终音源偏移量"
+    },
+    "initialBpm": {
+      "label": "初始 BPM",
+      "description": "谱面起始 BPM，用于计算实际偏移量"
+    },
+    "timeSignature": {
+      "label": "初始拍号",
+      "description": "谱面起始拍号，用于计算实际偏移量",
+      "numerator": "拍号分子",
+      "denominator": "拍号分母"
+    },
+    "blankMeasure": {
+      "label": "开头添加空白小节",
+      "description": "在谱面和音源开头插入一个带节拍提示的空白小节，与 Margrete 中的对应选项一致"
+    },
+    "stageId": {
+      "label": "背景 ID",
+      "description": "用于命名并注册所生成背景的数字 ID"
+    },
+    "notesFieldLine": {
+      "label": "轨道线颜色",
+      "description": "生成背景时使用的轨道线颜色",
+      "placeholder": "搜索轨道线…",
+      "empty": "未找到轨道线"
+    },
+    "hcaKey": {
+      "label": "HCA 加密密钥",
+      "description": "生成 HCA 音源时使用的加密密钥"
+    },
+    "jacketFile": {
+      "label": "封面文件",
+      "description": "谱面引用的封面图片"
+    },
+    "backgroundFile": {
+      "label": "背景图片",
+      "description": "谱面引用的自定义背景图片"
+    }
+  },
+  "errors": {
+    "chartUnread": "无法读取谱面",
+    "invalidHcaKey": "HCA 加密密钥必须是无符号 64 位整数",
+    "generic": {
+      "title": "出错了",
+      "pageLoadDescription": "加载页面时发生意外错误",
+      "appDescription": "应用发生意外错误"
+    },
+    "notFound": {
+      "title": "找不到页面",
+      "description": "你访问的页面不存在或已被移动"
+    }
+  },
+  "alerts": {
+    "fileChanged": "谱面文件已于 {time} 修改。请重新加载以使用最新版本"
+  },
+  "help": {
+    "aboutAriaLabel": "关于 {title}",
+    "metadata": {
+      "trigger": "如何设置？",
+      "instruction": "请在谱面属性的注释（Comment）中添加以下命令：",
+      "twoValueHint": "只填写一个值时，将按 ID 或名称查找已有素材；填写两个值时，将直接使用指定的 ID 和自定义名称",
+      "openWiki": "查看完整 Wiki 文档",
+      "imageAlt": "企鹅工具箱 Wiki 中的谱面元数据命令示例",
+      "titles": {
+        "stage": "设置背景类型",
+        "fline": "设置轨道线",
+        "genre": "设置歌曲流派",
+        "wetag": "设置 WORLD'S END 标签",
+        "main": "设置基准难度",
+        "date": "设置发布日期"
+      },
+      "commands": {
+        "stage": "#meta stage [StringID]",
+        "fline": "#meta fline [StringID]",
+        "genre": "#meta genre [StringID]",
+        "wetag": "#meta wetag [StringID]",
+        "main": "#meta main [true/false]",
+        "date": "#meta date [yyyyMMdd]"
+      },
+      "examples": {
+        "stage": "#meta stage 114514 自定义",
+        "fline": "#meta fline 0 橙色",
+        "genre": "#meta genre 1000 自制谱",
+        "wetag": "#meta wetag 0 狂",
+        "main": "#meta main true",
+        "date": "#meta date 20260713"
+      },
+      "hints": {
+        "main": "设为 true 后，此谱面将作为 Option 扫描时的基准难度；未指定时，默认使用最高难度",
+        "date": "请输入 yyyyMMdd 格式的八位日期"
+      }
+    }
+  },
+  "statusBar": {
+    "clear": "清除",
+    "closePanelAriaLabel": "关闭 CLI 输出面板",
+    "toggleOutputAriaLabel": "切换 CLI 输出",
+    "toggleOutputTooltip": "切换 CLI 输出",
+    "cliOutputAriaLabel": "CLI 输出日志"
+  },
+  "windowChrome": {
+    "minimize": "最小化",
+    "restore": "还原",
+    "maximize": "最大化",
+    "close": "关闭"
+  },
+  "sidebar": {
+    "toggleAriaLabel": "切换侧边栏",
+    "toggleTitle": "切换侧边栏",
+    "sheetTitle": "侧边栏",
+    "sheetDescription": "显示移动端侧边栏"
+  },
+  "diagnostics": {
+    "title": "诊断",
+    "filters": {
+      "all": "全部",
+      "error": "错误",
+      "warning": "警告",
+      "information": "信息"
+    },
+    "countSummary": "已显示 {shown} / {total} 条",
+    "table": {
+      "severity": "严重性",
+      "message": "信息",
+      "context": "上下文",
+      "time": "时间"
+    },
+    "emptySelection": "请选择一条诊断信息",
+    "actions": {
+      "copySelected": "复制选中",
+      "copyAll": "全部复制"
+    }
+  },
+  "onboarding": {
+    "title": "读取游戏素材",
+    "description": "尚未导入最新的 CHUNITHM 游戏数据。你可以扫描游戏文件夹，读取最新的流派、背景和轨道线 ID；也可以跳过此步骤，继续使用内置数据",
+    "collecting": "正在读取…",
+    "browseGameFolder": "浏览游戏文件夹…",
+    "errors": {
+      "collectionFailed": "读取游戏素材失败"
+    }
+  },
+  "audio": {
+    "dropMessage": "将音源或谱面拖到此处",
+    "fields": {
+      "audioFile": "音源文件",
+      "oneMeasureOffset": "一小节时长"
+    },
+    "errors": {
+      "noAudioInChart": "谱面中没有指定音源文件，请另行选择或拖入文件",
+      "missingAudioOrSongId": "请选择音源文件，并输入整数形式的歌曲 ID",
+      "invalidTiming": "请检查同步设置"
+    },
+    "notify": {
+      "invalidDrop": "请拖入谱面文件或 WAV、OGG、MP3 音源"
+    }
+  },
+  "chart": {
+    "dropMessage": "将谱面拖到此处进行查看和编辑",
+    "fields": {
+      "designer": "谱面作者",
+      "difficulty": "难度类别",
+      "difficultyPlaceholder": "搜索难度…",
+      "difficultyEmpty": "未找到难度"
+    },
+    "preview": {
+      "title": "歌曲标题",
+      "artist": "艺术家",
+      "level": "难度定数",
+      "notesField": "轨道线",
+      "weTag": "WORLD'S END 类型",
+      "weDifficulty": "WORLD'S END 星级",
+      "weDifficultyPlaceholder": "搜索 WORLD'S END 星级…",
+      "weDifficultyEmpty": "未找到 WORLD'S END 星级"
+    },
+    "errors": {
+      "missingChart": "请先选择有效的谱面文件",
+      "invalidSongIdOrBpm": "请检查歌曲 ID 和显示 BPM"
+    },
+    "notify": {
+      "invalidDrop": "请拖入 MGXC、UGC、SUS 或 C2S 谱面文件"
+    },
+    "dialog": {
+      "saveTitle": "保存转换后的 {extension} 谱面",
+      "filterName": "{extension} 谱面"
+    }
+  },
+  "jacket": {
+    "dropMessage": "将封面图片或谱面拖到此处",
+    "fields": {
+      "image": "封面图片",
+      "jacketId": "封面 ID",
+      "fileName": "文件名"
+    },
+    "errors": {
+      "noImageInChart": "谱面中没有指定封面图片，请另行选择或拖入文件",
+      "missingImage": "请先选择图片",
+      "invalidJacketId": "封面 ID 必须是整数或留空"
+    },
+    "notify": {
+      "invalidDrop": "请拖入谱面或图片文件"
+    },
+    "dialog": {
+      "saveTitle": "保存封面 DDS",
+      "filterName": "DDS 纹理"
+    }
+  },
+  "song": {
+    "errors": {
+      "missingChart": "请先选择谱面文件",
+      "invalidProperties": "请检查歌曲、谱面和同步设置",
+      "missingAudio": "请先选择音源文件",
+      "missingJacket": "请先选择封面图片",
+      "missingBackground": "请先选择自定义背景图片",
+      "missingStageId": "导出自定义背景时，请填写背景 ID"
+    },
+    "preview": {
+      "empty": "谱面中没有可显示的属性",
+      "notAvailable": "请先选择谱面文件以查看属性",
+      "labels": {
+        "song": "乐曲",
+        "title": "歌曲标题",
+        "artist": "艺术家",
+        "chart": "谱面",
+        "designer": "谱面作者",
+        "difficulty": "难度类别",
+        "displayBpm": "显示 BPM",
+        "mgxcId": "MGXC ID",
+        "details": "详细",
+        "file": "文件",
+        "difficultyId": "难度类别 ID",
+        "resolvedJacketFile": "封面文件（实际路径）",
+        "resolvedBackgroundFile": "背景图片（实际路径）",
+        "resolvedAudioFile": "音源文件（实际路径）",
+        "barOffset": "一小节时长",
+        "inputPath": "输入文件"
+      }
+    },
+    "inspectorHelp": {
+      "title": "从谱面属性中读取的歌曲标题",
+      "artist": "从谱面属性中读取的艺术家名称",
+      "mgxcId": "谱面格式支持时，从中读取的原始 MGXC ID",
+      "designer": "从谱面属性中读取的谱面作者",
+      "difficulty": "此谱面在游戏中的难度类别",
+      "difficultyId": "转换时使用的难度类别数字 ID",
+      "level": "选曲界面中显示的难度定数",
+      "weTag": "此谱面所属的 WORLD'S END 类型",
+      "weDifficulty": "此谱面的 WORLD'S END 类型和星级",
+      "customStage": "是否根据谱面指定的背景图片生成自定义背景",
+      "resolvedFile": "根据谱面中记录的路径找到的实际文件路径",
+      "audioFile": "谱面中指定的音源文件路径",
+      "barOffset": "开头插入的一小节时长",
+      "chartFile": "解析器读取的谱面文件路径",
+      "inputPath": "传给谱面检查命令的输入路径"
+    }
+  },
+  "stage": {
+    "dropMessage": "将背景、谱面或特效图片拖到此处",
+    "fields": {
+      "background": "背景",
+      "effect": "特效 {index}"
+    },
+    "errors": {
+      "noBackgroundInChart": "谱面中没有指定背景图片，请另行选择或拖入文件",
+      "missingBackgroundOrStageId": "请选择背景图片，并输入整数形式的背景 ID"
+    },
+    "notify": {
+      "slotsFull": "已选择一张背景图片和四张特效图片",
+      "invalidDrop": "请拖入谱面或图片文件"
+    }
+  },
+  "option": {
+    "source": "来源",
+    "folder": "Option 文件夹",
+    "settings": "设置",
+    "properties": "属性",
+    "optionName": "Option 名称",
+    "batchSize": "同时转换任务数",
+    "outputTypes": "资源类型",
+    "convertCharts": "谱面",
+    "convertAudio": "音源",
+    "convertJackets": "封面",
+    "convertBackgrounds": "背景",
+    "generateEventXml": "生成 Event.xml",
+    "ultimaEventId": "ULTIMA 解锁事件 ID",
+    "weEventId": "WORLD'S END 解锁事件 ID",
+    "generateReleaseTagXml": "生成 ReleaseTag.xml",
+    "releaseTagId": "ReleaseTag ID",
+    "releaseTagTitle": "ReleaseTag 名称",
+    "scanPreview": "扫描预览",
+    "emptyPreview": "请选择 Option 文件夹以扫描其中的内容",
+    "convert": "转换",
+    "fieldDescriptions": {
+      "optionName": "生成的 Option 所使用的四字符名称",
+      "batchSize": "同时处理的谱面或曲包数量上限；填写 -1 表示不限制",
+      "outputTypes": "选择输出中包含的资源类型"
+    },
+    "chartFormats": {
+      "remove": "移除 {format}",
+      "add": "添加 {format}",
+      "reloadPrompt": "保存新的谱面格式顺序并重新加载，以更新扫描结果",
+      "saveAndReload": "保存并重载"
+    },
+    "errors": {
+      "missingFolder": "请先选择 Option 文件夹",
+      "missingNameOrConfig": "请输入四字符 Option 名称，或选择包含 options.json 的文件夹",
+      "noop": "请至少选择一种转换内容，或启用 Event.xml"
+    },
+    "scan": {
+      "noBooks": "未找到曲包",
+      "notScanned": "未扫描",
+      "noMatches": "没有匹配的谱面",
+      "noMatchesDescription": "当前设置的格式中没有匹配的谱面。请在设置中添加所需格式，然后保存并重载",
+      "closePreview": "关闭扫描预览",
+      "summary": "{books} 个曲包 · {charts} 个谱面",
+      "diagnosticCounts": "警告：{warnings}，错误：{errors}，信息：{info}",
+      "notableIssues": "主要问题：",
+      "moreIssues": "…另有 {count} 条。请打开“诊断”查看完整内容",
+      "hasDiagnostics": "此谱面包含扫描诊断信息"
+    },
+    "preview": {
+      "title": "预览",
+      "contents": "扫描内容",
+      "previewRange": "预览范围",
+      "main": "基准谱面",
+      "mainDifficulty": "基准难度",
+      "mainDifficultyPlaceholder": "搜索难度…",
+      "mainDifficultyEmpty": "未找到难度",
+      "customStage": "自定义背景",
+      "expandBook": "展开曲包",
+      "properties": "属性",
+      "notAvailable": "请在预览列表中选择曲包或谱面",
+      "filePath": "文件路径",
+      "help": {
+        "mainDifficulty": "Option 转换时，将使用此谱面的属性作为该歌曲的基准",
+        "main": "此谱面是否被明确指定为 Option 转换时的基准谱面"
+      }
+    }
+  },
+  "settings": {
+    "appearance": {
+      "title": "外观"
+    },
+    "theme": {
+      "label": "主题",
+      "options": {
+        "light": "浅色",
+        "dark": "深色",
+        "system": "跟随系统"
+      }
+    },
+    "language": {
+      "label": "语言",
+      "empty": "未找到语言",
+      "options": {
+        "en": "English",
+        "zh-Hans": "简体中文"
+      }
+    }
+  },
+  "extract": {
+    "music": {
+      "dropMessage": "将 Music.xml 拖到此处",
+      "fields": {
+        "musicXml": "Music.xml",
+        "jacket": "封面覆盖",
+        "acb": "ACB 覆盖",
+        "awb": "AWB 覆盖",
+        "noAudio": "允许缺少音源",
+        "noJacket": "允许缺少封面"
+      },
+      "errors": {
+        "missingMusicXml": "请先选择 Music.xml 文件"
+      },
+      "notify": {
+        "invalidDrop": "请拖入 Music.xml 文件"
+      }
+    },
+    "chart": {
+      "dropMessage": "将 C2S 谱面拖到此处",
+      "errors": {
+        "missingChart": "请先选择 C2S 谱面文件",
+        "invalidSongIdOrBpm": "请检查歌曲 ID 和显示 BPM"
+      },
+      "notify": {
+        "invalidDrop": "请拖入 C2S 谱面文件"
+      },
+      "dialog": {
+        "saveTitle": "保存提取的 UGC 谱面",
+        "filterName": "UGC 谱面"
+      }
+    },
+    "audio": {
+      "dropMessage": "将 ACB 或 AWB 文件拖到此处",
+      "fields": {
+        "criAudio": "ACB / AWB 文件",
+        "pairedInput": "配对的 ACB / AWB"
+      },
+      "errors": {
+        "missingAudio": "请先选择 ACB 或 AWB 文件"
+      },
+      "notify": {
+        "invalidDrop": "请拖入 ACB 或 AWB 文件"
+      }
+    },
+    "stage": {
+      "dropMessage": "将 AFB 文件拖到此处",
+      "fields": {
+        "afb": "AFB 文件"
+      },
+      "errors": {
+        "missingAfb": "请先选择 AFB 文件"
+      },
+      "notify": {
+        "invalidDrop": "请拖入 AFB 文件"
+      }
+    }
+  },
+  "misc": {
+    "runtime": {
+      "loading": "正在加载运行环境信息…",
+      "browserPreview": "浏览器预览 — Tauri 运行时不可用",
+      "unavailable": "无法获取运行环境信息",
+      "paths": "路径",
+      "labels": {
+        "version": "版本",
+        "appVersion": "UI 版本",
+        "appBuildDate": "UI 构建日期",
+        "cliVersion": "CLI 版本",
+        "cliBuildDate": "CLI 构建日期",
+        "cli": "CLI",
+        "assets": "资源",
+        "userData": "用户数据",
+        "temp": "临时文件"
+      }
+    },
+    "sections": {
+      "runtime": "版本",
+      "gameAssets": "游戏素材",
+      "debug": "调试"
+    },
+    "catalog": {
+      "summary": "{genres} 个流派 · {stages} 种背景 · {fieldLines} 种轨道线"
+    },
+    "fields": {
+      "gameDirectory": "游戏目录"
+    },
+    "directoryLabels": {
+      "userData": "用户数据",
+      "assets": "资源",
+      "temp": "临时文件"
+    },
+    "actions": {
+      "runCliInfo": "查看 CLI 信息",
+      "refresh": "刷新",
+      "open": "打开",
+      "recollectAssets": "读取游戏素材",
+      "openUserData": "打开用户数据目录",
+      "openAssets": "打开资源目录",
+      "openTemp": "打开临时目录",
+      "forceError": "测试错误页面",
+      "previewUpdateNotes": "预览更新说明",
+      "hideUpdateNotesPreview": "隐藏更新说明预览",
+      "checkForUpdates": "检查更新",
+      "installUpdate": "下载并安装",
+      "relaunch": "重新启动"
+    },
+    "updates": {
+      "title": "更新",
+      "status": {
+        "checking": "正在检查更新…",
+        "available": "发现新版本 {version}",
+        "upToDate": "已是最新版本",
+        "downloading": "正在下载更新… {downloaded} / {total}",
+        "waitingForJob": "等待当前任务完成…",
+        "installing": "正在安装更新…",
+        "error": "更新失败"
+      },
+      "notify": {
+        "available": "发现新版本 {version}",
+        "downloading": "正在下载更新…",
+        "installing": "正在安装更新…应用即将重启"
+      },
+      "notes": "更新说明",
+      "tauriOnly": "只有已安装的 Tauri 应用可以检查更新"
+    },
+    "notify": {
+      "directoryTauriOnly": "只有 Tauri 应用可以打开目录",
+      "assetCollectTauriOnly": "只有 Tauri 应用可以读取游戏素材"
+    },
+    "errors": {
+      "pathUnavailable": "{label} 路径不可用"
+    }
+  }
+}

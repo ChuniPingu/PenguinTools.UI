@@ -1,0 +1,25 @@
+[package]
+name = "penguin-tools"
+version = "2.0.0"
+authors = ["Foahh"]
+edition = "2024"
+
+[lib]
+name = "penguin_tools_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+
+[dependencies]
+tauri = { version = "2", features = ["protocol-asset"] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri-plugin-dialog = "2"
+tauri-plugin-prevent-default = { version = "5", features = ["platform-windows"] }
+tauri-plugin-updater = "2"
+tauri-plugin-process = "2"
+notify = "8"
+
