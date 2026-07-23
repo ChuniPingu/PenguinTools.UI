@@ -5,8 +5,9 @@ use tauri::{AppHandle, Manager};
 
 const RUNTIME_DIR_NAME: &str = "runtime";
 const CLI_EXE_NAME: &str = "PenguinTools.CLI.exe";
-const MUA_BINARIES: &[&str] = &["mua_wav.exe", "mua_img.exe", "mua_cri.exe"];
-const MIN_MUA_BYTES: u64 = 1024 * 1024;
+const MUA_BINARIES: &[&str] = &["mua_wav.exe", "mua_img.exe"];
+const CRI_BINARY: &str = "PenguinTools.CRI.exe";
+const MIN_TOOL_BYTES: u64 = 1024 * 1024;
 
 #[derive(Debug, Clone, serde::Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -153,7 +154,7 @@ fn validate_runtime_layout(runtime_root: &Path) -> Result<(), String> {
         }
 
         let size = fs::metadata(&path).map_err(|e| e.to_string())?.len();
-        if size < MIN_MUA_BYTES {
+        if size < MIN_TOOL_BYTES {
             return Err(format!(
                 "Runtime mua binary '{name}' looks invalid ({size} bytes)."
             ));
@@ -161,6 +162,18 @@ fn validate_runtime_layout(runtime_root: &Path) -> Result<(), String> {
 
         validate_pe_executable(&path)?;
     }
+
+    let cri_path = runtime_root.join("assets").join("cri").join(CRI_BINARY);
+    if !cri_path.is_file() {
+        return Err(format!("Runtime CRI binary '{CRI_BINARY}' was not found."));
+    }
+    let cri_size = fs::metadata(&cri_path).map_err(|e| e.to_string())?.len();
+    if cri_size < MIN_TOOL_BYTES {
+        return Err(format!(
+            "Runtime CRI binary '{CRI_BINARY}' looks invalid ({cri_size} bytes)."
+        ));
+    }
+    validate_pe_executable(&cri_path)?;
 
     Ok(())
 }
@@ -191,10 +204,11 @@ mod tests {
         let runtime_root = std::env::temp_dir().join(format!("pb-runtime-invalid-{stamp}"));
 
         fs::create_dir_all(runtime_root.join("assets/mua")).unwrap();
+        fs::create_dir_all(runtime_root.join("assets/cri")).unwrap();
         fs::write(runtime_root.join("PenguinTools.CLI.exe"), [b'M', b'Z']).unwrap();
         fs::write(runtime_root.join("assets/mua/mua_wav.exe"), b"stub").unwrap();
         fs::write(runtime_root.join("assets/mua/mua_img.exe"), b"stub").unwrap();
-        fs::write(runtime_root.join("assets/mua/mua_cri.exe"), b"stub").unwrap();
+        fs::write(runtime_root.join("assets/cri/PenguinTools.CRI.exe"), b"stub").unwrap();
 
         let error = validate_runtime_layout(&runtime_root).unwrap_err();
         assert!(error.contains("mua_wav.exe"));
@@ -211,13 +225,22 @@ mod tests {
         let runtime_root = std::env::temp_dir().join(format!("pb-runtime-valid-{stamp}"));
 
         fs::create_dir_all(runtime_root.join("assets/mua")).unwrap();
+        fs::create_dir_all(runtime_root.join("assets/cri")).unwrap();
         fs::write(runtime_root.join("PenguinTools.CLI.exe"), [b'M', b'Z']).unwrap();
         for name in MUA_BINARIES {
-            let mut bytes = vec![0_u8; MIN_MUA_BYTES as usize];
+            let mut bytes = vec![0_u8; MIN_TOOL_BYTES as usize];
             bytes[0] = b'M';
             bytes[1] = b'Z';
             fs::write(runtime_root.join("assets/mua").join(name), bytes).unwrap();
         }
+        let mut cri_bytes = vec![0_u8; MIN_TOOL_BYTES as usize];
+        cri_bytes[0] = b'M';
+        cri_bytes[1] = b'Z';
+        fs::write(
+            runtime_root.join("assets/cri").join(CRI_BINARY),
+            cri_bytes,
+        )
+        .unwrap();
 
         validate_runtime_layout(&runtime_root).unwrap();
 

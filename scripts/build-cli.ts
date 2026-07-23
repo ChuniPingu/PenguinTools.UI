@@ -6,6 +6,7 @@ const projectRoot = resolve(import.meta.dir, "..");
 const penguinToolsRoot = join(projectRoot, "external", "PenguinTools");
 const muaRoot = join(penguinToolsRoot, "External", "mua");
 const muaPublishRoot = join(muaRoot, "target", "release", "mua");
+const criProject = join(penguinToolsRoot, "PenguinTools.CRI", "PenguinTools.CRI.csproj");
 const publishProfile = "WinX64-SelfContained-SingleFile";
 const publishRoot = join(
   penguinToolsRoot,
@@ -17,7 +18,9 @@ const publishRoot = join(
   publishProfile,
 );
 const muaAssetsRoot = join(publishRoot, "assets", "mua");
-const requiredMuaBinaries = ["mua_wav.exe", "mua_img.exe", "mua_cri.exe"];
+const criAssetsRoot = join(publishRoot, "assets", "cri");
+const requiredMuaBinaries = ["mua_wav.exe", "mua_img.exe"];
+const criBinary = "PenguinTools.CRI.exe";
 
 function ensureSubmodule(root: string, label: string): void {
   if (existsSync(join(root, ".git"))) {
@@ -73,10 +76,19 @@ function assertPublishedAssets(): void {
       );
     }
   }
+
+  const criPath = join(criAssetsRoot, criBinary);
+  if (!existsSync(criPath) || !statSync(criPath).isFile()) {
+    throw new Error(
+      `Published runtime asset '${criBinary}' was not found at '${criPath}'.\n\nRepublish PenguinTools.CLI after publishing PenguinTools.CRI.`,
+    );
+  }
 }
 
 ensureSubmodule(penguinToolsRoot, "PenguinTools submodule");
 ensureSubmodule(muaRoot, "mua submodule");
+ensureSubmodule(join(penguinToolsRoot, "External", "SonicAudioTools"), "SonicAudioTools submodule");
+ensureSubmodule(join(penguinToolsRoot, "External", "vgaudio"), "vgaudio submodule");
 ensureBuildPrerequisites();
 
 console.log("Building mua media tools...");
@@ -85,6 +97,11 @@ assertMuaPublishOutput();
 
 console.log("Restoring PenguinTools...");
 await $`dotnet restore PenguinTools.slnx`.cwd(penguinToolsRoot);
+
+console.log("Publishing PenguinTools.CRI...");
+await $`dotnet publish ${criProject} -p:PublishProfile=${publishProfile} /p:DebugType=None /p:DebugSymbols=false`.cwd(
+  penguinToolsRoot,
+);
 
 console.log("Publishing PenguinTools.CLI...");
 await $`dotnet publish PenguinTools.CLI/PenguinTools.CLI.csproj -p:PublishProfile=${publishProfile} /p:DebugType=None /p:DebugSymbols=false`.cwd(

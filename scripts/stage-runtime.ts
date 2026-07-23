@@ -20,9 +20,11 @@ const publishRoot = join(
 const cliExe = join(publishRoot, "PenguinTools.CLI.exe");
 const assetsRoot = join(publishRoot, "assets");
 const muaAssetsRoot = join(assetsRoot, "mua");
+const criAssetsRoot = join(assetsRoot, "cri");
 const stageRoot = join(projectRoot, "src-tauri", "resources", "runtime");
-const requiredMuaBinaries = ["mua_wav.exe", "mua_img.exe", "mua_cri.exe"];
-const MIN_MUA_BYTES = 1024 * 1024;
+const requiredMuaBinaries = ["mua_wav.exe", "mua_img.exe"];
+const criBinary = "PenguinTools.CRI.exe";
+const MIN_TOOL_BYTES = 1024 * 1024;
 
 function getDirSizeBytes(dir: string): number {
   let total = 0;
@@ -52,19 +54,19 @@ function assertPeExecutable(path: string, label: string): void {
   }
 }
 
-function assertMuaBinary(path: string, name: string): void {
+function assertToolBinary(path: string, name: string): void {
   if (!existsSync(path) || !statSync(path).isFile()) {
-    throw new Error(`CLI mua asset '${name}' was not found at '${path}'.`);
+    throw new Error(`CLI tool asset '${name}' was not found at '${path}'.`);
   }
 
   const size = statSync(path).size;
-  if (size < MIN_MUA_BYTES) {
+  if (size < MIN_TOOL_BYTES) {
     throw new Error(
-      `CLI mua asset '${name}' looks invalid (${size} bytes) at '${path}'.\n\nRun:\n  bun run build:cli`,
+      `CLI tool asset '${name}' looks invalid (${size} bytes) at '${path}'.\n\nRun:\n  bun run build:cli`,
     );
   }
 
-  assertPeExecutable(path, `CLI mua asset '${name}'`);
+  assertPeExecutable(path, `CLI tool asset '${name}'`);
 }
 
 function assertRuntimeAssets(): void {
@@ -78,9 +80,17 @@ function assertRuntimeAssets(): void {
     );
   }
 
-  for (const binary of requiredMuaBinaries) {
-    assertMuaBinary(join(muaAssetsRoot, binary), binary);
+  if (!existsSync(criAssetsRoot) || !statSync(criAssetsRoot).isDirectory()) {
+    throw new Error(
+      `CLI cri assets were not found at '${criAssetsRoot}'.\n\nRun:\n  bun run build:cli`,
+    );
   }
+
+  for (const binary of requiredMuaBinaries) {
+    assertToolBinary(join(muaAssetsRoot, binary), binary);
+  }
+
+  assertToolBinary(join(criAssetsRoot, criBinary), criBinary);
 }
 
 if (!skipPublish) {
@@ -106,8 +116,9 @@ await cp(cliExe, join(stageRoot, "PenguinTools.CLI.exe"));
 await cp(assetsRoot, join(stageRoot, "assets"), { recursive: true });
 
 for (const binary of requiredMuaBinaries) {
-  assertMuaBinary(join(stageRoot, "assets", "mua", binary), binary);
+  assertToolBinary(join(stageRoot, "assets", "mua", binary), binary);
 }
+assertToolBinary(join(stageRoot, "assets", "cri", criBinary), criBinary);
 
 const totalMb = Math.round((getDirSizeBytes(stageRoot) / (1024 * 1024)) * 100) / 100;
 console.log(`Staged runtime payload: ${totalMb} MB`);
