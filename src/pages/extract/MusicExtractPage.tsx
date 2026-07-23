@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { Input } from "@/components/ui/input";
 import { FieldGroup } from "@/components/ui/field";
 import { FileFolderPicker } from "@/components/layout/FileFolderPicker";
+import { HcaKeyField } from "@/components/layout/HcaKeyField";
 import { ToolPageShell } from "@/components/layout/ToolPageShell";
 import { WorkspaceSection } from "@/components/layout/WorkspaceSection";
 import { PropertiesSection } from "@/components/layout/PropertiesSection";
@@ -112,18 +112,11 @@ export function MusicExtractPage() {
             />
           </PropertyGroup>
           <PropertyGroup title={t("ui.groups.encoding")} contentClassName="gap-0 py-0">
-            <PropertyRow
-              label={t("ui.properties.hcaKey.label")}
-              description={t("ui.properties.hcaKey.description")}
-              htmlFor="extract-music-hca-key"
-            >
-              <Input
-                id="extract-music-hca-key"
-                className="max-w-xl"
-                value={hcaKey}
-                onChange={(event) => patchExtractMusic({ hcaKey: event.target.value })}
-              />
-            </PropertyRow>
+            <HcaKeyField
+              id="extract-music-hca-key"
+              value={hcaKey}
+              onChange={(value) => patchExtractMusic({ hcaKey: value })}
+            />
             <PropertyRow
               label={t("ui.extract.music.fields.noAudio")}
               htmlFor="extract-music-no-audio"

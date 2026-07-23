@@ -40,6 +40,7 @@ interface OptionPageState {
   chartFileDiscovery: string;
   batchSize: string;
   hcaKey: string;
+  ignoreCache: boolean;
   releaseTagId: string;
   releaseTagTitleName: string;
   ultimaEventId: string;
@@ -158,6 +159,7 @@ export const useToolPageStore = create<ToolPageStore>((set) => ({
     chartFileDiscovery: DEFAULT_CHART_FILE_DISCOVERY,
     batchSize: "8",
     hcaKey: DEFAULT_HCA_KEY,
+    ignoreCache: false,
     releaseTagId: "99",
     releaseTagTitleName: "自制譜",
     ultimaEventId: "1000001",

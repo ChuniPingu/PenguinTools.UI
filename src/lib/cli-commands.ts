@@ -164,6 +164,7 @@ export interface OptionBuildSettings {
   chartFileDiscovery?: string;
   batchSize?: number;
   hcaKey?: string;
+  ignoreCache?: boolean;
   generateEventXml?: boolean;
   generateReleaseTagXml?: boolean;
   releaseTagId?: number;
@@ -209,6 +210,7 @@ export function optionBuildArgs(
   if (settings.chartFileDiscovery) args.push("--chart-file-discovery", settings.chartFileDiscovery);
   if (settings.batchSize != null) args.push("--batch-size", String(settings.batchSize));
   if (settings.hcaKey) args.push("--hca-key", settings.hcaKey);
+  if (settings.ignoreCache) args.push("--ignore-cache");
   if (settings.generateEventXml != null) {
     args.push("--generate-event-xml", String(settings.generateEventXml));
   }

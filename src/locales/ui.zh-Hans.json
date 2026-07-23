@@ -200,7 +200,8 @@
     },
     "hcaKey": {
       "label": "HCA 加密密钥",
-      "description": "生成 HCA 音源时使用的加密密钥"
+      "description": "生成 HCA 音源时使用的加密密钥",
+      "reset": "恢复默认"
     },
     "jacketFile": {
       "label": "封面文件",
@@ -461,13 +462,15 @@
     "generateReleaseTagXml": "生成 ReleaseTag.xml",
     "releaseTagId": "ReleaseTag ID",
     "releaseTagTitle": "ReleaseTag 名称",
+    "ignoreCache": "忽略缓存",
     "scanPreview": "扫描预览",
     "emptyPreview": "请选择 Option 文件夹以扫描其中的内容",
     "convert": "转换",
     "fieldDescriptions": {
       "optionName": "生成的 Option 所使用的四字符名称",
       "batchSize": "同时处理的谱面或曲包数量上限；填写 -1 表示不限制",
-      "outputTypes": "选择输出中包含的资源类型"
+      "outputTypes": "选择输出中包含的资源类型",
+      "ignoreCache": "即使输入与输出均匹配转换缓存，也强制重新转换封面、舞台和音频"
     },
     "chartFormats": {
       "remove": "移除 {format}",

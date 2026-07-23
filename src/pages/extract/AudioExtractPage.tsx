@@ -1,12 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { Input } from "@/components/ui/input";
 import { FieldGroup } from "@/components/ui/field";
 import { FileFolderPicker } from "@/components/layout/FileFolderPicker";
+import { HcaKeyField } from "@/components/layout/HcaKeyField";
 import { ToolPageShell } from "@/components/layout/ToolPageShell";
 import { WorkspaceSection } from "@/components/layout/WorkspaceSection";
 import { PropertiesSection } from "@/components/layout/PropertiesSection";
 import { PropertyGroup } from "@/components/layout/PropertyGroup";
-import { PropertyRow } from "@/components/layout/PropertyRow";
 import { ConvertWorkspace } from "@/components/convert/ConvertWorkspace";
 import { useNativeFileDrop } from "@/hooks/use-native-file-drop";
 import { useApp } from "@/contexts/AppContext";
@@ -90,18 +89,11 @@ export function AudioExtractPage() {
             />
           </PropertyGroup>
           <PropertyGroup title={t("ui.groups.encoding")} contentClassName="gap-0 py-0">
-            <PropertyRow
-              label={t("ui.properties.hcaKey.label")}
-              description={t("ui.properties.hcaKey.description")}
-              htmlFor="extract-audio-hca-key"
-            >
-              <Input
-                id="extract-audio-hca-key"
-                className="max-w-xl"
-                value={hcaKey}
-                onChange={(event) => patchExtractAudio({ hcaKey: event.target.value })}
-              />
-            </PropertyRow>
+            <HcaKeyField
+              id="extract-audio-hca-key"
+              value={hcaKey}
+              onChange={(value) => patchExtractAudio({ hcaKey: value })}
+            />
           </PropertyGroup>
         </PropertiesSection>
       </ConvertWorkspace>

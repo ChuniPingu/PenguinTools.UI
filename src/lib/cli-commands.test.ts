@@ -97,6 +97,11 @@ describe("direct convert CLI arguments", () => {
     expect(optionBuildArgs("input", "out", { saveConfig: true })).toContain("--save-config");
   });
 
+  it("emits --ignore-cache only when requested", () => {
+    expect(optionBuildArgs("input", "out", {})).not.toContain("--ignore-cache");
+    expect(optionBuildArgs("input", "out", { ignoreCache: true })).toContain("--ignore-cache");
+  });
+
   it("saves option scan settings only when requested", () => {
     expect(
       optionScanArgs("input", { chartFileDiscovery: "[ugc, mgxc]", saveConfig: true }),

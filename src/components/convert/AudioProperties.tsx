@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { ComputedField, ComputedValue } from "@/components/layout/ComputedField";
+import { HcaKeyField } from "@/components/layout/HcaKeyField";
 import { PropertiesSection } from "@/components/layout/PropertiesSection";
 import { PropertyGroup } from "@/components/layout/PropertyGroup";
 import { PropertyRow } from "@/components/layout/PropertyRow";
@@ -165,19 +166,11 @@ export function AudioProperties() {
       </PropertyGroup>
 
       <PropertyGroup title={t("ui.groups.advanced")} contentClassName="gap-0 py-0">
-        <PropertyRow
-          label={t("ui.properties.hcaKey.label")}
-          description={t("ui.properties.hcaKey.description")}
-          htmlFor="hca-key"
-        >
-          <Input
-            id="hca-key"
-            className="max-w-xl font-mono"
-            value={hcaKey}
-            inputMode="numeric"
-            onChange={(event) => patchAudio({ hcaKey: event.target.value })}
-          />
-        </PropertyRow>
+        <HcaKeyField
+          id="hca-key"
+          value={hcaKey}
+          onChange={(value) => patchAudio({ hcaKey: value })}
+        />
       </PropertyGroup>
     </PropertiesSection>
   );

@@ -200,7 +200,8 @@
     },
     "hcaKey": {
       "label": "HCA encryption key",
-      "description": "The encryption key applied to the generated HCA audio."
+      "description": "The encryption key applied to the generated HCA audio.",
+      "reset": "Reset to default"
     },
     "jacketFile": {
       "label": "Jacket file",
@@ -461,13 +462,15 @@
     "generateReleaseTagXml": "Generate Release Tag XML",
     "releaseTagId": "Release tag ID",
     "releaseTagTitle": "Release tag title",
+    "ignoreCache": "Ignore cache",
     "scanPreview": "Scan preview",
     "emptyPreview": "Select an option folder to scan its contents.",
     "convert": "Convert",
     "fieldDescriptions": {
       "optionName": "Four-character identifier used for the generated option.",
       "batchSize": "Maximum number of charts or books converted at the same time. Use -1 for no limit.",
-      "outputTypes": "Choose which asset types to include in the output."
+      "outputTypes": "Choose which asset types to include in the output.",
+      "ignoreCache": "Force reconversion of jacket, stage, and audio even when inputs and outputs match the conversion cache."
     },
     "chartFormats": {
       "remove": "Remove {format}",

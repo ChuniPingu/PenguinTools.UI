@@ -4,6 +4,7 @@ import { ChartFormatOrderField } from "@/components/export/ChartFormatOrderField
 import { Button } from "@/components/ui/button";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { HcaKeyField } from "@/components/layout/HcaKeyField";
 import { PropertiesSection } from "@/components/layout/PropertiesSection";
 import { PropertyGroup } from "@/components/layout/PropertyGroup";
 import { PropertyRow } from "@/components/layout/PropertyRow";
@@ -28,6 +29,7 @@ export function OptionSettings({
     chartFileDiscovery,
     batchSize,
     hcaKey,
+    ignoreCache,
     releaseTagId,
     releaseTagTitleName,
     ultimaEventId,
@@ -208,17 +210,20 @@ export function OptionSettings({
       </PropertyGroup>
 
       <PropertyGroup title={t("ui.groups.advanced")} contentClassName="gap-0 py-0">
+        <HcaKeyField
+          id="option-hca-key"
+          value={hcaKey}
+          onChange={(value) => patchOption({ hcaKey: value })}
+        />
         <PropertyRow
-          label={t("ui.properties.hcaKey.label")}
-          description={t("ui.properties.hcaKey.description")}
-          htmlFor="option-hca-key"
+          label={t("ui.option.ignoreCache")}
+          description={t("ui.option.fieldDescriptions.ignoreCache")}
         >
-          <Input
-            id="option-hca-key"
-            className="max-w-xl font-mono"
-            value={hcaKey}
-            inputMode="numeric"
-            onChange={(event) => patchOption({ hcaKey: event.target.value })}
+          <ToggleField
+            id="option-ignore-cache"
+            label={t("ui.option.ignoreCache")}
+            checked={ignoreCache}
+            onChange={(checked) => patchOption({ ignoreCache: checked })}
           />
         </PropertyRow>
       </PropertyGroup>
