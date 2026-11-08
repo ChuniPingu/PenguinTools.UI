@@ -66,7 +66,7 @@ Enable Windows Developer Mode or use a shell permitted to create symbolic links 
 
 ## Sonar setup
 
-The [Sonar workflow](../.github/workflows/sonar.yml) needs repository secret `SONAR_TOKEN` and variables `SONAR_ORGANIZATION` and `SONAR_PROJECT_KEY`. Disable automatic analysis in the Sonar project when using this workflow.
+The [Sonar workflow](../.github/workflows/sonar.yml) needs repository secret `SONARQUBE_USER_TOKEN` and variables `SONAR_ORGANIZATION` and `SONAR_PROJECT_KEY`. Disable automatic analysis in the Sonar project when using this workflow.
 
 The job waits for its quality gate. Fork and Dependabot pull requests skip analysis because they lack the credential. [sonar-project.properties](../sonar-project.properties) defines the analysis scope; coverage metrics are excluded, while CI runs tests separately.
 

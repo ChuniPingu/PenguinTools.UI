@@ -41,7 +41,7 @@ jobs:
         id: analysis
         uses: SonarSource/sonarqube-scan-action@4d1dc0c91ee400dcf8a6dddf2f705ac36542e304 # v8.4.0
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONARQUBE_USER_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
         with:
           args: >-
@@ -51,7 +51,7 @@ jobs:
       - name: Report quality gate findings
         if: failure() && steps.analysis.outcome == 'failure'
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONARQUBE_USER_TOKEN }}
           SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
           PULL_REQUEST: ${{ github.event.pull_request.number }}
           BRANCH: ${{ github.ref_name }}
