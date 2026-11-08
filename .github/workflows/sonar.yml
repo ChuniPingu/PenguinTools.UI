@@ -1,0 +1,73 @@
+name: Sonar
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sonar:
+    name: Sonar quality gate
+    # Forks and Dependabot do not receive the analysis credential.
+    if: >-
+      github.actor != 'dependabot[bot]' &&
+      (github.event_name != 'pull_request' ||
+       github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          submodules: true
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: "1.4.4"
+      - uses: voidzero-dev/setup-vp@cab1ab9eaff52d4857875f4f2c016e36af8f2c76 # v1.22.0
+        with:
+          node-version: "24"
+          cache: true
+      - run: vp install --frozen-lockfile
+      - name: Analyze and wait for the quality gate
+        id: analysis
+        uses: SonarSource/sonarqube-scan-action@4d1dc0c91ee400dcf8a6dddf2f705ac36542e304 # v8.4.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
+        with:
+          args: >-
+            -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
+            -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
+            ${{ github.event_name != 'pull_request' && format('-Dsonar.branch.name={0}', github.ref_name) || '' }}
+      - name: Report quality gate findings
+        if: failure() && steps.analysis.outcome == 'failure'
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
+          PULL_REQUEST: ${{ github.event.pull_request.number }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          selector=(--data-urlencode "branch=$BRANCH")
+          if [[ -n "$PULL_REQUEST" ]]; then
+            selector=(--data-urlencode "pullRequest=$PULL_REQUEST")
+          fi
+          curl --fail --silent --show-error --get \
+            --header "Authorization: Bearer $SONAR_TOKEN" \
+            --data-urlencode "projectKey=$SONAR_PROJECT_KEY" "${selector[@]}" \
+            https://sonarcloud.io/api/qualitygates/project_status \
+            | jq '.projectStatus.conditions | map(select(.status != "OK"))'
+          curl --fail --silent --show-error --get \
+            --header "Authorization: Bearer $SONAR_TOKEN" \
+            --data-urlencode "componentKeys=$SONAR_PROJECT_KEY" "${selector[@]}" \
+            --data-urlencode 'resolved=false' --data-urlencode 'ps=100' \
+            https://sonarcloud.io/api/issues/search \
+            | jq '{total, issues: [.issues[] | {key, type, severity, rule, component, line, message}]}'

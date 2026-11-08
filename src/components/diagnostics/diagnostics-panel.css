@@ -1,0 +1,518 @@
+.diagnostics-panel {
+  --background: #fff;
+  --foreground: #292521;
+  --muted: #f8f7f5;
+  --muted-foreground: #77716a;
+  --border: #ddd8d1;
+  --input: var(--border);
+  --accent: #eeece6;
+  --accent-foreground: var(--foreground);
+  --primary: #3b3730;
+  --primary-foreground: #fff;
+  --diagnostics-head: #eeece8;
+  --diagnostics-selected: #f9efcf;
+  --diagnostics-marker: #b18114;
+  --diagnostics-error: #ae342b;
+  --diagnostics-warning: #90610c;
+  --diagnostics-info: #4d6779;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: min(760px, calc(100vw - 2rem));
+  max-width: none;
+  height: min(88dvh, 760px);
+  min-width: 0;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow: 0 8px 24px #332a211a;
+  font:
+    400 13px/1.55 "Segoe UI",
+    "Microsoft YaHei UI",
+    sans-serif;
+}
+
+.dark .diagnostics-panel {
+  --background: #252320;
+  --foreground: #f2eee9;
+  --muted: #201e1b;
+  --muted-foreground: #b1aaa1;
+  --border: #4a443d;
+  --accent: #373128;
+  --primary: #ded7ca;
+  --primary-foreground: #28231c;
+  --diagnostics-head: #302c26;
+  --diagnostics-selected: #45381f;
+  --diagnostics-marker: #dfb656;
+  --diagnostics-error: #f28d82;
+  --diagnostics-warning: #e5b455;
+  --diagnostics-info: #93b1c9;
+
+  box-shadow: 0 8px 24px #00000026;
+}
+
+.diagnostics-panel [data-slot="dialog-header"] {
+  flex-shrink: 0;
+  padding: 17px 48px 14px 20px;
+}
+
+.diagnostics-panel [data-slot="dialog-title"] {
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.diagnostics-panel > [data-slot="dialog-close"] {
+  top: 12px;
+  right: 12px;
+  color: var(--muted-foreground);
+}
+
+.diagnostics-toolbar {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0 12px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--border);
+  min-height: 41px;
+}
+
+.diagnostics-filters {
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.diagnostics-toolbar [data-slot="tabs-list"] {
+  height: 40px;
+  gap: 20px;
+  padding: 0;
+}
+
+.diagnostics-toolbar [data-slot="tabs-trigger"] {
+  height: 100%;
+  padding: 8px 0 10px;
+  border: 0;
+  color: var(--muted-foreground);
+  font-weight: 400;
+}
+
+.diagnostics-toolbar [data-slot="tabs-trigger"][data-active] {
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.diagnostics-toolbar [data-slot="tabs-trigger"]::after {
+  bottom: -1px;
+}
+
+.diagnostics-filter-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.diagnostics-toolbar [data-severity="Error"] .diagnostics-filter-icon {
+  color: var(--diagnostics-error);
+}
+
+.diagnostics-toolbar [data-severity="Warning"] .diagnostics-filter-icon {
+  color: var(--diagnostics-warning);
+}
+
+.diagnostics-toolbar [data-severity="Information"] .diagnostics-filter-icon {
+  color: var(--diagnostics-info);
+}
+
+.diagnostics-search {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 30px;
+  margin-left: auto;
+  border: 1px solid transparent;
+}
+
+.diagnostics-search[data-open] {
+  flex: 0 1 220px;
+  min-width: 120px;
+  border-color: var(--border);
+}
+
+.diagnostics-search:focus-within {
+  border-color: var(--diagnostics-marker);
+}
+
+.diagnostics-search-toggle {
+  color: var(--muted-foreground);
+}
+
+.diagnostics-search-input {
+  height: 100%;
+  border: 0;
+  background: transparent;
+  font-size: 12px;
+  box-shadow: none;
+}
+
+.diagnostics-search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.diagnostics-list {
+  background: var(--muted);
+}
+
+.diagnostics-list-header {
+  border-bottom: 1px solid var(--border);
+  background: var(--diagnostics-head);
+}
+
+.diagnostics-severity-col {
+  width: 83px;
+}
+
+.diagnostics-file-col {
+  width: 124px;
+}
+
+.diagnostics-location-col {
+  width: 126px;
+}
+
+.diagnostics-list th {
+  height: 32px;
+  padding: 7px 10px;
+  color: var(--muted-foreground);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.diagnostics-list td {
+  padding: 9px 10px;
+  vertical-align: middle;
+}
+
+.diagnostics-list th:first-child,
+.diagnostics-list td:first-child {
+  padding-left: 16px;
+}
+
+.diagnostics-list [data-slot="table-row"] {
+  border-color: color-mix(in srgb, var(--border) 65%, transparent);
+}
+
+.diagnostics-list-header [data-slot="table-row"] {
+  border: 0;
+}
+
+.diagnostics-list-row:hover {
+  background: var(--accent);
+}
+
+.diagnostics-list-row[data-state="selected"] {
+  background: var(--diagnostics-selected);
+  box-shadow: inset 3px 0 var(--diagnostics-marker);
+}
+
+.diagnostics-list-row:focus-visible {
+  outline: 2px solid var(--diagnostics-marker);
+  outline-offset: -2px;
+}
+
+.diagnostics-list .diagnostics-file-cell {
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+
+.diagnostics-location-cell {
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.diagnostics-sort-header {
+  height: auto;
+  justify-content: flex-start;
+  gap: 4px;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  white-space: nowrap;
+}
+
+.diagnostics-sort-header [data-icon] {
+  width: 11px;
+  height: 11px;
+  opacity: 0;
+}
+
+.diagnostics-sort-header:hover [data-icon],
+.diagnostics-sort-header:focus-visible [data-icon],
+.diagnostics-sort-header[data-sorted] [data-icon] {
+  opacity: 1;
+}
+
+.diagnostics-panel [data-slot="resizable-handle"] {
+  flex-shrink: 0;
+  width: 100%;
+  height: 12px;
+  border-block: 1px solid var(--border);
+  background: var(--diagnostics-head);
+}
+
+.diagnostics-panel [data-slot="resizable-handle"] > div {
+  width: 26px;
+  height: 2px;
+  background: var(--muted-foreground);
+  opacity: 0.5;
+  rotate: none;
+  transform: none;
+}
+
+.diagnostics-detail {
+  background: var(--background);
+}
+
+.diagnostics-detail-content {
+  padding: 18px 22px 12px;
+}
+
+.diagnostics-detail-content > [data-slot="table-container"],
+.diagnostics-detail-content > dl,
+.diagnostics-detail-content > .diagnostics-source {
+  margin-top: 18px;
+}
+
+.diagnostics-detail header > div,
+.diagnostics-detail header > div > span {
+  font-size: 11px;
+}
+
+.diagnostics-detail h3 {
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.diagnostics-detail [data-diagnostic-path] {
+  margin-top: 5px;
+}
+
+.diagnostics-detail table {
+  table-layout: fixed;
+  font-size: 13px;
+}
+
+.diagnostics-detail table th,
+.diagnostics-detail table td {
+  padding: 7px 10px;
+  font-weight: 400;
+}
+
+.diagnostics-detail table th:first-child,
+.diagnostics-detail table td:first-child {
+  padding-left: 0;
+}
+
+.diagnostics-detail table thead th {
+  padding-top: 0;
+  color: var(--muted-foreground);
+  font-size: 11px;
+}
+
+.diagnostics-detail dl {
+  grid-template-columns: minmax(88px, max-content) minmax(0, 1fr);
+  gap: 8px 12px;
+  font-size: 13px;
+}
+
+.diagnostics-detail dt {
+  font-size: 12px;
+}
+
+.diagnostics-source {
+  padding: 6px 10px;
+  background: color-mix(in srgb, var(--diagnostics-error) 9%, var(--background));
+  font:
+    12px/1.7 Consolas,
+    "SFMono-Regular",
+    monospace;
+}
+
+.diagnostics-explanation {
+  margin-top: 14px;
+}
+
+.diagnostics-technical-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.diagnostics-technical-actions button {
+  height: auto;
+  gap: 5px;
+  padding: 0;
+  color: var(--muted-foreground);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.diagnostics-detail [data-slot="collapsible-content"] pre {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  background: var(--muted);
+  font:
+    12px/1.6 Consolas,
+    "SFMono-Regular",
+    monospace;
+}
+
+.diagnostics-panel [data-slot="dialog-footer"] {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--muted);
+}
+
+.diagnostics-count {
+  margin-right: auto;
+  color: var(--muted-foreground);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.diagnostics-panel [data-slot="dialog-footer"] button {
+  height: auto;
+  min-height: 31px;
+  gap: 6px;
+  padding: 6px 11px;
+  border-color: var(--border);
+  background: var(--background);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.diagnostics-panel [data-slot="dialog-footer"] .diagnostics-copy-selected {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.diagnostics-panel [data-slot="dialog-footer"] button:hover {
+  filter: brightness(0.94);
+}
+
+@media (max-width: 639px) {
+  .diagnostics-panel {
+    font-size: 12px;
+  }
+
+  .diagnostics-panel [data-slot="dialog-header"],
+  .diagnostics-panel [data-slot="dialog-footer"],
+  .diagnostics-toolbar {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .diagnostics-toolbar [data-slot="tabs-list"] {
+    gap: 10px;
+  }
+
+  .diagnostics-filter-icon {
+    display: none;
+  }
+
+  .diagnostics-toolbar[data-search-open] .diagnostics-filters {
+    display: none;
+  }
+
+  .diagnostics-toolbar[data-search-open] .diagnostics-search {
+    flex: 1;
+  }
+
+  .diagnostics-file-col,
+  .diagnostics-list .diagnostics-file-cell {
+    display: none;
+  }
+
+  .diagnostics-severity-col {
+    width: 41px;
+  }
+
+  .diagnostics-location-col {
+    width: 104px;
+  }
+
+  .diagnostics-list th,
+  .diagnostics-list td {
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+
+  .diagnostics-list th:first-child,
+  .diagnostics-list td:first-child {
+    padding-left: 12px;
+  }
+
+  .diagnostics-sort-compact [data-icon] {
+    display: none;
+  }
+
+  .diagnostics-detail-content {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .diagnostics-detail h3 {
+    font-size: 18px;
+  }
+
+  .diagnostics-detail table th,
+  .diagnostics-detail table td {
+    padding-right: 5px;
+    padding-left: 5px;
+    overflow-wrap: anywhere;
+  }
+
+  .diagnostics-count {
+    flex-basis: 100%;
+  }
+}
+
+@media (pointer: coarse) {
+  .diagnostics-toolbar {
+    min-height: 45px;
+  }
+
+  .diagnostics-search {
+    height: 44px;
+  }
+
+  .diagnostics-search-input {
+    font-size: 16px;
+  }
+
+  .diagnostics-toolbar [data-slot="tabs-trigger"],
+  .diagnostics-toolbar [data-slot="button"],
+  .diagnostics-panel [data-slot="dialog-footer"] button,
+  .diagnostics-technical-actions button {
+    min-height: 44px;
+  }
+}

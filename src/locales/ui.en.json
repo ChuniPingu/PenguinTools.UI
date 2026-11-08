@@ -1,0 +1,861 @@
+{
+  "app": {
+    "name": "PenguinTools"
+  },
+  "common": {
+    "emptyValue": "—",
+    "yes": "Yes",
+    "no": "No",
+    "loading": "Loading…",
+    "unavailable": "This action is currently unavailable",
+    "unknown": "Unknown",
+    "more": "More",
+    "breadcrumb": "Breadcrumb",
+    "actions": {
+      "convert": "Convert",
+      "extract": "Extract",
+      "reload": "Reload",
+      "browse": "Browse",
+      "cancel": "Cancel",
+      "close": "Close",
+      "skip": "Skip"
+    },
+    "sections": {
+      "source": "Source",
+      "properties": "Properties"
+    },
+    "fields": {
+      "chartFile": "Chart file"
+    },
+    "notify": {
+      "unavailable": "This action is currently unavailable.",
+      "invalidSettings": "Invalid settings document: {path}.",
+      "invalidHcaKey": "The HCA encryption key must be a whole number from 0 to 18446744073709551615."
+    }
+  },
+  "filePicker": {
+    "placeholder": {
+      "file": "Select a file…",
+      "folder": "Select a folder…"
+    },
+    "clearAriaLabel": "Clear {label}",
+    "filters": {
+      "chart": "Chart files",
+      "c2s": "C2S charts",
+      "image": "Image files",
+      "audio": "Audio files",
+      "awb": "AWB files",
+      "musicXml": "Music.xml",
+      "afb": "AFB files"
+    }
+  },
+  "cli": {
+    "summary": {
+      "errors": "{count} error(s)",
+      "warnings": "{count} warning(s)",
+      "info": "{count} info"
+    },
+    "notify": {
+      "completedWith": "Completed with {summary}.",
+      "alreadyRunning": "A task is already running.",
+      "blockedDuringUpdate": "Actions are unavailable while an update is downloading.",
+      "cancelled": "Operation cancelled.",
+      "exitedWithCode": "CLI exited unexpectedly (x{code})"
+    }
+  },
+  "query": {
+    "complete": "Inspection complete",
+    "failed": "Inspection failed",
+    "cancelled": "Inspection cancelled",
+    "notify": {
+      "timedOut": "Inspection timed out."
+    }
+  },
+  "progress": {
+    "working": "Working…",
+    "operations": {
+      "info": "Reading version information…",
+      "option": {
+        "scan": "Scanning option…",
+        "build": "Building option…"
+      },
+      "music": {
+        "build": "Building song…",
+        "extract": "Extracting music…"
+      },
+      "chart": {
+        "convert": "Converting chart…",
+        "inspect": "Inspecting chart…"
+      },
+      "jacket": {
+        "convert": "Converting jacket…",
+        "convert-file": "Converting jacket…"
+      },
+      "audio": {
+        "convert": "Converting audio…",
+        "convert-file": "Converting audio…",
+        "extract": "Extracting audio…"
+      },
+      "stage": {
+        "build": "Building stage…",
+        "build-files": "Building stage…",
+        "extract": "Extracting stage…"
+      },
+      "assets": {
+        "collect": "Collecting assets…"
+      }
+    }
+  },
+  "nav": {
+    "groups": {
+      "export": "Export",
+      "convert": "Convert",
+      "extract": "Extract",
+      "system": "System"
+    },
+    "pages": {
+      "option": "Export Option",
+      "song": "Export Song",
+      "chart": "Convert Chart",
+      "jacket": "Convert Jacket",
+      "audio": "Convert Audio",
+      "stage": "Convert Stage",
+      "extractMusic": "Extract Music",
+      "extractChart": "Extract Chart",
+      "extractAudio": "Extract Audio",
+      "extractStage": "Extract Stage",
+      "assets": "Assets",
+      "misc": "Settings"
+    }
+  },
+  "groups": {
+    "jobSetup": "Job setup",
+    "outputs": "Assets",
+    "advanced": "Advanced",
+    "eventXml": "Event XML",
+    "releaseTagXml": "Release Tag XML",
+    "genre": "Genre XML",
+    "song": "Song",
+    "chart": "Chart",
+    "bgm": "BGM preview",
+    "sync": "Sync",
+    "encoding": "Encoding",
+    "misc": "Settings",
+    "display": "Assets",
+    "output": "Output"
+  },
+  "groupDescriptions": {
+    "eventXml": "Set which in-game events unlock ULTIMA and WORLD'S END charts when Event.xml is generated.",
+    "releaseTagXml": "Set the version category this song belongs to.",
+    "genre": "Set the genre category this song belongs to."
+  },
+  "properties": {
+    "chartFormat": {
+      "label": "Output chart format"
+    },
+    "songId": {
+      "label": "Song ID",
+      "description": "The Song ID is a unique number that identifies this song in the game. It is read from the chart file's MGXC ID."
+    },
+    "displayBpm": {
+      "label": "Display BPM"
+    },
+    "chartDiscovery": {
+      "label": "Chart formats",
+      "description": "Chart formats to scan, in priority order. If multiple charts share the same Song ID and difficulty, the format listed first is used."
+    },
+    "genre": {
+      "label": "Genre",
+      "placeholder": "Search genres…",
+      "empty": "No genres found."
+    },
+    "sortName": {
+      "label": "Sort name"
+    },
+    "releaseDate": {
+      "label": "Release date"
+    },
+    "mainTil": {
+      "label": "Main timeline",
+      "description": "The timeline (TIL) that controls how fast bar lines scroll during gameplay."
+    },
+    "stage": {
+      "label": "Stage"
+    },
+    "unlockEvent": {
+      "label": "Unlock event ID",
+      "description": "The in-game event ID required to play this ULTIMA or WORLD'S END chart. Leave blank for charts that are unlocked by default."
+    },
+    "previewStart": {
+      "label": "Preview start (s)"
+    },
+    "previewStop": {
+      "label": "Preview stop (s)"
+    },
+    "manualOffset": {
+      "label": "Manual offset (s)"
+    },
+    "realOffset": {
+      "label": "Real offset (s)",
+      "description": "The final audio offset. Positive values shift audio later; negative values shift it earlier."
+    },
+    "initialBpm": {
+      "label": "Initial BPM"
+    },
+    "timeSignature": {
+      "label": "Initial time signature",
+      "placeholder": "4/4",
+      "numerator": "Beats per measure",
+      "denominator": "Beat unit"
+    },
+    "blankMeasure": {
+      "label": "Leading blank measure",
+      "description": "When enabled, inserts a blank measure before the chart and audio."
+    },
+    "stageId": {
+      "label": "Stage ID",
+      "description": "The unique number used to identify this background in the game."
+    },
+    "notesFieldLine": {
+      "label": "Field line color",
+      "placeholder": "Search field lines…",
+      "empty": "No field lines found."
+    },
+    "releaseTag": {
+      "label": "Version category",
+      "placeholder": "Search version categories…",
+      "empty": "No version categories found."
+    },
+    "hcaKey": {
+      "label": "HCA encryption key",
+      "description": "The encryption key for output HCA audio files. Usually leave the default unless your target game build requires a different key.",
+      "reset": "Reset to default"
+    },
+    "jacketFile": {
+      "label": "Jacket file"
+    },
+    "jacketId": {
+      "label": "Jacket ID",
+      "description": "The filename used to identify this jacket in the game."
+    },
+    "backgroundFile": {
+      "label": "Background file"
+    },
+    "mgxcId": {
+      "description": "The Song ID used in Margrete."
+    },
+    "barOffset": {
+      "label": "Measure offset (s)",
+      "description": "The duration of the leading blank measure, calculated from the initial BPM and time signature."
+    },
+    "mainDifficulty": {
+      "description": "Which difficulty's chart is used to read shared song metadata (title, genre, jacket, audio, and so on). If no chart is marked as the baseline, the highest difficulty is used."
+    },
+    "main": {
+      "description": "Whether this chart is marked as the baseline. Shared song metadata (title, genre, jacket, audio, and so on) is read from the baseline chart. If none is marked, the highest difficulty is used."
+    },
+    "optionName": {
+      "description": "The output Option folder name. Use exactly four characters, for example MINE."
+    },
+    "batchSize": {
+      "description": "The maximum number of songs converted at once. Enter -1 to let the program choose automatically."
+    },
+    "ignoreCache": {
+      "description": "When enabled, jacket, background, and audio are always reconverted, even if the files have not changed."
+    },
+    "autoUpdate": {
+      "label": "Auto update"
+    }
+  },
+  "errors": {
+    "chartUnread": "The chart could not be read.",
+    "generic": {
+      "title": "Something went wrong",
+      "pageLoadDescription": "An unexpected error occurred while loading this page.",
+      "appDescription": "An unexpected error occurred in the application."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you are looking for does not exist or may have been moved."
+    }
+  },
+  "alerts": {
+    "fileChanged": "A chart file was modified at {time}. Reload to use the latest version."
+  },
+  "help": {
+    "aboutAriaLabel": "About {title}",
+    "metadata": {
+      "trigger": "How to set?",
+      "propertySection": "In Basic Info",
+      "metaSection": "Set automatically on load",
+      "findInAssets": "Find {name} in Assets",
+      "imageAlts": {
+        "property": "Margrete Basic Info field for this setting",
+        "meta": "Margrete Comments tab with a #meta command"
+      },
+      "titles": {
+        "stage": {
+          "property": "Custom background",
+          "meta": "Built-in game background"
+        },
+        "fline": "Field line color",
+        "genre": "Genre",
+        "wetag": "WORLD'S END tag",
+        "main": "Baseline difficulty",
+        "date": "Release date",
+        "songId": "Song ID",
+        "sortName": "Sort name",
+        "blankMeasure": "Leading blank measure",
+        "initialTiming": "Initial BPM and time signature",
+        "mainTil": "Main timeline"
+      },
+      "propertyInstructions": {
+        "songId": [
+          "Open Edit chart property and switch to Basic Info.",
+          "Enter a number for Song ID."
+        ],
+        "sortName": [
+          "Open Edit chart property and switch to Basic Info.",
+          "Fill in Title (Reading)."
+        ],
+        "blankMeasure": [
+          "Open Edit chart property and switch to Basic Info.",
+          "Set Insert a blank bar before the first measure."
+        ],
+        "initialTiming": [
+          "Set the initial BPM at the start of the chart.",
+          "Set the initial time signature."
+        ],
+        "mainTil": [
+          "Open Edit chart property and switch to Basic Info.",
+          "Under Chart, set Base timeline."
+        ],
+        "stage": [
+          "Open Edit chart property and switch to Basic Info.",
+          "Under Display, set Background image / video to your background file."
+        ],
+        "fline": [
+          "Open Edit chart property and switch to Basic Info.",
+          "Under Display, set Field dividing line color."
+        ],
+        "genre": ["Open Edit chart property and switch to Basic Info.", "Under Song, set Genre."],
+        "wetag": [
+          "Open Edit chart property and switch to Basic Info.",
+          "Under Chart, set Difficulty to WORLD'S END.",
+          "Enter a single character in WE attribute."
+        ]
+      },
+      "commands": {
+        "stage": "#meta stage [asset ID]",
+        "fline": "#meta fline [asset ID]",
+        "genre": "#meta genre [asset ID]",
+        "wetag": "#meta wetag [asset ID]",
+        "main": "#meta main [true/false]",
+        "date": "#meta date [yyyyMMdd]"
+      },
+      "hints": {
+        "date": "Use eight digits in yyyyMMdd format (for example, 20260721).",
+        "songId": "Charts that share the same Song ID are treated as the same song. Prefer values above 6000 to avoid clashing with built-in songs.",
+        "sortName": "Used when sorting songs in the music list. Prefer pinyin and uppercase letters."
+      },
+      "metaInstructions": [
+        "Open Edit chart property.",
+        "Switch to the Comments tab.",
+        "Add this command:"
+      ]
+    },
+    "enlargeImage": "Enlarge screenshot",
+    "imageTitle": "Setting reference"
+  },
+  "statusBar": {
+    "operations": {
+      "unknown": "Run task",
+      "info": "Read version",
+      "option": {
+        "scan": "Scan option",
+        "build": "Build option"
+      },
+      "music": {
+        "build": "Build song",
+        "extract": "Extract music"
+      },
+      "chart": {
+        "convert": "Convert chart",
+        "inspect": "Inspect chart",
+        "extract": "Extract chart"
+      },
+      "jacket": {
+        "convert": "Convert jacket",
+        "convert-file": "Convert jacket"
+      },
+      "audio": {
+        "convert": "Convert audio",
+        "convert-file": "Convert audio",
+        "extract": "Extract audio"
+      },
+      "stage": {
+        "build": "Build stage",
+        "build-files": "Build stage",
+        "extract": "Extract stage"
+      },
+      "assets": {
+        "collect": "Collect assets"
+      }
+    },
+    "activity": {
+      "idle": "Ready",
+      "running": "Running…",
+      "success": "Completed",
+      "error": "Failed",
+      "cancelled": "Cancelled",
+      "tasks": "{count} tasks",
+      "elapsed": "{seconds}s"
+    },
+    "outputTruncated": "Showing recent output only",
+    "toggleOutputAriaLabel": "Show or hide the activity log",
+    "toggleOutputTooltip": "Show or hide the activity log",
+    "stopJobAriaLabel": "Stop job",
+    "stopJobTooltip": "Stop the running job",
+    "cliOutputAriaLabel": "Activity log"
+  },
+  "windowChrome": {
+    "minimize": "Minimize",
+    "restore": "Restore",
+    "maximize": "Maximize",
+    "close": "Close"
+  },
+  "sidebar": {
+    "toggleAriaLabel": "Toggle sidebar",
+    "toggleTitle": "Toggle sidebar",
+    "sheetTitle": "Sidebar",
+    "sheetDescription": "Displays the mobile sidebar."
+  },
+  "diagnostics": {
+    "title": "Diagnostics",
+    "filters": {
+      "all": "All",
+      "error": "Error",
+      "warning": "Warning",
+      "information": "Info"
+    },
+    "searchAriaLabel": "Search diagnostics",
+    "searchPlaceholder": "Search…",
+    "countSummary": "{shown} of {total} shown",
+    "noMatches": "No matching diagnostics.",
+    "table": {
+      "severity": "Level",
+      "message": "Issue",
+      "context": "File",
+      "time": "Position"
+    },
+    "timePosition": "Bar {bar}, beat {beat} + {tickOffset} ticks",
+    "timeTick": "Time: {tick} ticks",
+    "emptySelection": "Select a diagnostic.",
+    "actions": {
+      "copySelected": "Copy diagnostic",
+      "copyLocation": "Copy location",
+      "copyPath": "Copy path",
+      "technical": "Technical details",
+      "closeSearch": "Close search"
+    },
+    "positionTooltip": "Bar {bar}, beat {beat} + {tickOffset} ticks",
+    "rawTick": "{tick} ticks",
+    "line": "Line {line}",
+    "detailLabel": "Diagnostic details",
+    "notify": {
+      "copied": "Copied.",
+      "copyFailed": "Could not copy. Please try again."
+    },
+    "stages": {
+      "convert": "C2S conversion",
+      "parse": "Reading chart",
+      "parseC2s": "Reading C2S",
+      "audio": "Audio export",
+      "properties": "Chart properties"
+    },
+    "detail": {
+      "object": "Note",
+      "endpoint": "Position",
+      "start": "Start",
+      "end": "End",
+      "sourcePosition": "Source position",
+      "sourceLine": "Line in file",
+      "lane": "Lane",
+      "timeline": "Source timeline",
+      "outputTimeline": "After conversion",
+      "speedModifier": "Note speed multiplier",
+      "noteType": "Note type",
+      "field": "Setting",
+      "value": "Entered value",
+      "songTitle": "Song title",
+      "sortName": "Generated sort name"
+    },
+    "timeBeat": "Bar {bar}, beat {beat}",
+    "chartStart": "Start of chart"
+  },
+  "onboarding": {
+    "title": "Missing latest game data",
+    "description": "You can scan your CHUNITHM game data folder, or skip and continue with the built-in defaults.",
+    "note": "You can collect game assets again later in Settings.",
+    "collecting": "Collecting…",
+    "browseGameFolder": "Browse game folder…",
+    "notify": {
+      "collectionFailed": "Asset collection failed."
+    }
+  },
+  "audio": {
+    "dropMessage": "Drop audio or a chart here",
+    "fields": {
+      "audioFile": "Audio file"
+    },
+    "errors": {
+      "noAudioInChart": "No audio file was found in the chart. Browse or drop one instead."
+    },
+    "notify": {
+      "invalidDrop": "Drop a chart, WAV, OGG, or MP3 file here.",
+      "missingAudioOrSongId": "Select audio and provide an integer Song ID.",
+      "invalidTiming": "Check the timing properties."
+    }
+  },
+  "chart": {
+    "metadataOnly": "This chart version is too new; conversion is unavailable.",
+    "formatVersion": "Chart version",
+    "dropMessage": "Drop a chart to inspect and edit",
+    "fields": {
+      "designer": "Designer",
+      "difficulty": "Difficulty",
+      "difficultyPlaceholder": "Search difficulties…",
+      "difficultyEmpty": "No difficulties found."
+    },
+    "preview": {
+      "title": "Title",
+      "artist": "Artist",
+      "level": "Level",
+      "weTag": "WE tag",
+      "weDifficulty": "WE difficulty",
+      "weDifficultyPlaceholder": "Search WE difficulties…",
+      "weDifficultyEmpty": "No WE difficulties found."
+    },
+    "notify": {
+      "invalidDrop": "Drop an MGXC, UGC, or SUS chart file here.",
+      "missingChart": "Select a valid chart file first.",
+      "invalidSongIdOrBpm": "Check the Song ID and Display BPM values."
+    },
+    "dialog": {
+      "saveTitle": "Save converted {extension} chart",
+      "filterName": "{extension} chart"
+    }
+  },
+  "jacket": {
+    "dropMessage": "Drop a jacket image or chart",
+    "fields": {
+      "image": "Jacket image",
+      "fileName": "File name"
+    },
+    "errors": {
+      "noImageInChart": "No jacket image was found in the chart. Browse or drop one instead."
+    },
+    "notify": {
+      "invalidDrop": "Drop a chart or image file here.",
+      "missingImage": "Select an image first.",
+      "invalidJacketId": "Jacket ID must be an integer or left empty."
+    },
+    "dialog": {
+      "saveTitle": "Save jacket DDS",
+      "filterName": "DDS texture"
+    }
+  },
+  "song": {
+    "preview": {
+      "notInspected": "Not inspected",
+      "noMetadata": "No metadata",
+      "labels": {
+        "song": "Song",
+        "title": "Title",
+        "artist": "Artist",
+        "chart": "Chart",
+        "designer": "Designer",
+        "difficulty": "Difficulty",
+        "displayBpm": "Display BPM",
+        "mgxcId": "MGXC ID",
+        "details": "Details",
+        "file": "File",
+        "resolvedJacketFile": "Actual jacket path",
+        "resolvedBackgroundFile": "Actual background path",
+        "resolvedAudioFile": "Actual audio path"
+      }
+    },
+    "notify": {
+      "missingChart": "Select a chart file first."
+    }
+  },
+  "stage": {
+    "dropMessage": "Drop a background, chart, or effect images",
+    "fields": {
+      "background": "Background",
+      "effect": "Effect {index}"
+    },
+    "errors": {
+      "noBackgroundInChart": "No stage background was found in the chart. Browse or drop one instead."
+    },
+    "notify": {
+      "slotsFull": "The stage already has a background and four effect images.",
+      "invalidDrop": "Drop a chart or one or more image files here.",
+      "missingBackgroundOrStageId": "Select a background and provide an integer Stage ID."
+    }
+  },
+  "option": {
+    "partialScan": "Skipped {count} charts with unsupported versions.",
+    "source": "Source",
+    "folder": "Chart folder",
+    "settings": "Settings",
+    "optionName": "Option name",
+    "batchSize": "Songs to convert at once",
+    "outputTypes": "Asset types",
+    "convertCharts": "Charts",
+    "convertAudio": "Audio",
+    "convertJackets": "Jackets",
+    "convertBackgrounds": "Backgrounds",
+    "generateEventXml": "Generate Event XML",
+    "ultimaEventId": "ULTIMA event ID",
+    "weEventId": "WORLD'S END event ID",
+    "customReleaseTagXml": "Custom ReleaseTag.xml",
+    "releaseTagId": "Version category ID",
+    "releaseTagTitle": "Version category name",
+    "releaseTagVersion": "Release tag",
+    "customGenre": "Custom genre",
+    "genre": "Genre",
+    "genreId": "Genre ID",
+    "genreName": "Genre name",
+    "overrideChartGenre": "Ignore chart genre",
+    "ignoreCache": "Always reconvert",
+    "ignoreCacheField": "Conversion cache",
+    "scanPreview": "Scan preview",
+    "convert": "Convert",
+    "chartFormats": {
+      "remove": "Remove {format}",
+      "add": "Add {format}",
+      "saveAndReload": "Save and rescan"
+    },
+    "scan": {
+      "noBooks": "No songs found.",
+      "notScanned": "Not scanned",
+      "noMatches": "No matching charts",
+      "closePreview": "Close scan preview",
+      "summary": "{books} songs · {charts} charts",
+      "diagnosticCounts": "Warnings: {warnings}, Errors: {errors}, Info: {info}",
+      "notableIssues": "Notable issues:",
+      "moreIssues": "… and {count} more. Open Diagnostics for the full list.",
+      "hasDiagnostics": "This chart has scan diagnostics"
+    },
+    "preview": {
+      "contents": "Scanned contents",
+      "main": "Main",
+      "mainDifficulty": "Main difficulty",
+      "mainDifficultyPlaceholder": "Search difficulties…",
+      "mainDifficultyEmpty": "No difficulties found.",
+      "customStage": "Custom stage",
+      "expandBook": "Expand song",
+      "properties": "Properties",
+      "notAvailable": "Nothing selected",
+      "filePath": "File path"
+    },
+    "notify": {
+      "missingFolder": "Select a chart folder first.",
+      "missingNameOrConfig": "Provide a 4-character option name, or select a folder that contains an options.json config file.",
+      "noop": "Enable at least one conversion type or Event XML generation."
+    }
+  },
+  "settings": {
+    "appearance": {
+      "title": "Appearance"
+    },
+    "theme": {
+      "label": "Theme",
+      "options": {
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+      }
+    },
+    "language": {
+      "label": "Language",
+      "empty": "No languages found.",
+      "options": {
+        "en": "English",
+        "zh-Hans": "简体中文"
+      }
+    }
+  },
+  "extract": {
+    "music": {
+      "dropMessage": "Drop a Music.xml file here",
+      "fields": {
+        "musicXml": "Music.xml file",
+        "noAudio": "Allow missing audio",
+        "noJacket": "Allow missing jacket"
+      },
+      "notify": {
+        "invalidDrop": "Drop a Music.xml file here.",
+        "missingMusicXml": "Select a Music.xml file first."
+      }
+    },
+    "chart": {
+      "dropMessage": "Drop a C2S chart here",
+      "fields": {
+        "c2s": "C2S file"
+      },
+      "notify": {
+        "invalidDrop": "Drop a C2S chart file here.",
+        "missingChart": "Select a C2S chart file first.",
+        "invalidSongIdOrBpm": "Check the Song ID and Display BPM values."
+      },
+      "dialog": {
+        "saveTitle": "Save extracted {extension} chart",
+        "filterName": "{extension} chart"
+      }
+    },
+    "audio": {
+      "dropMessage": "Drop an AWB file here",
+      "fields": {
+        "awb": "AWB file"
+      },
+      "notify": {
+        "invalidDrop": "Drop an AWB file here.",
+        "missingAudio": "Select an AWB file first."
+      }
+    },
+    "stage": {
+      "dropMessage": "Drop an AFB file here",
+      "fields": {
+        "afb": "AFB file"
+      },
+      "notify": {
+        "invalidDrop": "Drop an AFB file here.",
+        "missingAfb": "Select an AFB file first."
+      }
+    }
+  },
+  "assets": {
+    "errors": {
+      "invalidDatabase": "Invalid asset database structure."
+    },
+    "tabs": {
+      "genre": "Genre",
+      "fieldLine": "Field line",
+      "stage": "Stage",
+      "weTag": "WORLD'S END"
+    },
+    "columns": {
+      "id": "Asset ID",
+      "name": "Name",
+      "actions": "Actions"
+    },
+    "searchAriaLabel": "Search assets",
+    "searchPlaceholder": "Search…",
+    "countSummary": "{shown} / {total}",
+    "emptyCatalog": "No game assets loaded. Open Settings to load them.",
+    "emptyCatalogAction": "Open Settings",
+    "noMatches": "No matching entries.",
+    "loading": "Loading assets…",
+    "actions": {
+      "refresh": "Refresh",
+      "copyMeta": "Copy setting command"
+    },
+    "notify": {
+      "loadFailed": "Could not load assets from {path}: {reason}",
+      "copied": "Copied."
+    },
+    "help": {
+      "trigger": "What's this?",
+      "title": "Using Assets",
+      "instructions": [
+        "Click the copy button next to the asset you want.",
+        "Open Edit chart property and switch to the Comments tab.",
+        "Paste the copied command."
+      ],
+      "imageAlt": "The Comments tab in Margrete's Edit chart property window"
+    }
+  },
+  "misc": {
+    "runtime": {
+      "loading": "Loading runtime information…",
+      "browserPreview": "Browser preview",
+      "unavailable": "Runtime information unavailable.",
+      "cliUnavailable": "Failed to load",
+      "paths": "Paths",
+      "labels": {
+        "appVersion": "UI version",
+        "appBuildDate": "UI build date",
+        "cliVersion": "CLI version",
+        "cliBuildDate": "CLI build date",
+        "cli": "CLI"
+      }
+    },
+    "sections": {
+      "runtime": "Version",
+      "credits": "Credits",
+      "gameAssets": "Game assets",
+      "debug": "Debug"
+    },
+    "credits": {
+      "thanks": "Special thanks to the PenguinTools maintainers."
+    },
+    "fields": {
+      "gameDirectory": "Game directory"
+    },
+    "directoryLabels": {
+      "userData": "User data",
+      "assets": "Assets",
+      "temp": "Temp"
+    },
+    "actions": {
+      "refresh": "Refresh",
+      "open": "Open",
+      "recollectAssets": "Collect game assets",
+      "forceError": "Test error page",
+      "showDiagnostics": "Show all diagnostics",
+      "checkForUpdates": "Check for updates",
+      "installUpdate": "Download and install"
+    },
+    "updates": {
+      "title": "Updates",
+      "status": {
+        "checking": "Checking for updates…",
+        "available": "Version {version} is available.",
+        "upToDate": "You are on the latest version.",
+        "downloading": "Downloading update… {downloaded} / {total}",
+        "waitingForJob": "Waiting for the current job to finish…",
+        "installing": "Installing update…",
+        "error": "Update failed.",
+        "devDisabled": "Updates are disabled in development builds"
+      },
+      "notify": {
+        "available": "Version {version} is available.",
+        "availableGoToSettings": "Version {version} is available. Open Settings to download and install.",
+        "downloading": "Downloading update…",
+        "downloadingAvailable": "Version {version} is available. Downloading update…",
+        "installing": "Installing update… The app will restart.",
+        "devDisabled": "Updates are disabled in development builds."
+      }
+    },
+    "notify": {
+      "pathUnavailable": "{label} path is unavailable."
+    }
+  },
+  "tasks": {
+    "failed": "Failed",
+    "assetsBusy": "Loading game assets…",
+    "waiting": "Waiting for other tasks to finish…",
+    "preparing": "Preparing…",
+    "cancelling": "Cancelling…",
+    "completedStatus": "Completed",
+    "cancelledStatus": "Cancelled",
+    "notify": {
+      "failed": "The task failed.",
+      "pageBusy": "A task is already running.",
+      "outputConflict": "Another task is using this output path.",
+      "assetsBusy": "Another task is using game assets."
+    }
+  }
+}

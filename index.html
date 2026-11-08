@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" autocomplete="off" suppressHydrationWarning>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PenguinTools</title>
+    <style>
+      html {
+        background: #fff;
+        color-scheme: light;
+      }
+      html.dark {
+        background: oklch(0.147 0.004 49.25);
+        color-scheme: dark;
+      }
+      body {
+        margin: 0;
+      }
+    </style>
+    <script>
+      (function () {
+        var storageKey = "penguin-butler-theme";
+        try {
+          var theme = localStorage.getItem(storageKey) || "system";
+          var resolved = theme;
+          if (theme === "system") {
+            resolved = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          }
+          if (resolved === "dark") {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+        } catch {
+          // Storage can be unavailable; the default theme remains until React initializes.
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
