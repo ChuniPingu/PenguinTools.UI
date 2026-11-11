@@ -239,26 +239,6 @@ export function canConvertInspectedChart(
   return data != null && data.notesParsed !== false && data.metadata != null;
 }
 
-export function formatChartSummary(chart: ChartSummary): string {
-  return [
-    t("ui.song.preview.labels.song"),
-    `${t("ui.song.preview.labels.title")}: ${chart.title}`,
-    `${t("ui.song.preview.labels.artist")}: ${chart.artist}`,
-    chart.songId != null ? `${t("ui.properties.songId.label")}: ${chart.songId}` : null,
-    "",
-    t("ui.song.preview.labels.chart"),
-    `${t("ui.song.preview.labels.designer")}: ${chart.designer}`,
-    `${t("ui.song.preview.labels.difficulty")}: ${chart.difficulty} ${chart.level}`,
-    `${t("ui.song.preview.labels.displayBpm")}: ${chart.mainBpm}`,
-    chart.mgxcId ? `${t("ui.song.preview.labels.mgxcId")}: ${chart.mgxcId}` : null,
-    "",
-    t("ui.song.preview.labels.details"),
-    `${t("ui.song.preview.labels.file")}: ${chart.filePath}`,
-  ]
-    .filter((value) => value !== null)
-    .join("\n");
-}
-
 export interface OptionScanResultData {
   books?: OptionScanBook[];
   configPath?: string | null;

@@ -40,10 +40,7 @@ export function useNavGroups(): NavGroup[] {
     () => [
       {
         label: t("ui.nav.groups.export"),
-        items: [
-          { title: t("ui.nav.pages.option"), url: "/option", icon: PackageIcon },
-          { title: t("ui.nav.pages.song"), url: "/song", icon: MusicIcon },
-        ],
+        items: [{ title: t("ui.nav.pages.option"), url: "/option", icon: PackageIcon }],
       },
       {
         label: t("ui.nav.groups.convert"),

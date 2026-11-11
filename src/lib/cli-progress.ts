@@ -1,6 +1,6 @@
 import i18n from "@/i18n";
 
-/** Map CLI argv (e.g. `music build …`) to the CLI operation id (`music.build`). */
+/** Map CLI argv (e.g. `option build …`) to the CLI operation id (`option.build`). */
 export function operationFromCliArgs(args: string[]): string | null {
   const command = args[0];
   if (!command || command.startsWith("-")) return null;

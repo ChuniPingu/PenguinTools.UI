@@ -80,7 +80,6 @@
         "build": "Building option…"
       },
       "music": {
-        "build": "Building song…",
         "extract": "Extracting music…"
       },
       "chart": {
@@ -115,7 +114,6 @@
     },
     "pages": {
       "option": "Export Option",
-      "song": "Export Song",
       "chart": "Convert Chart",
       "jacket": "Convert Jacket",
       "audio": "Convert Audio",
@@ -376,7 +374,6 @@
         "build": "Build option"
       },
       "music": {
-        "build": "Build song",
         "extract": "Extract music"
       },
       "chart": {
@@ -534,7 +531,8 @@
       "weTag": "WE tag",
       "weDifficulty": "WE difficulty",
       "weDifficultyPlaceholder": "Search WE difficulties…",
-      "weDifficultyEmpty": "No WE difficulties found."
+      "weDifficultyEmpty": "No WE difficulties found.",
+      "mgxcId": "MGXC ID"
     },
     "notify": {
       "invalidDrop": "Drop an MGXC, UGC, or SUS chart file here.",
@@ -563,30 +561,6 @@
     "dialog": {
       "saveTitle": "Save jacket DDS",
       "filterName": "DDS texture"
-    }
-  },
-  "song": {
-    "preview": {
-      "notInspected": "Not inspected",
-      "noMetadata": "No metadata",
-      "labels": {
-        "song": "Song",
-        "title": "Title",
-        "artist": "Artist",
-        "chart": "Chart",
-        "designer": "Designer",
-        "difficulty": "Difficulty",
-        "displayBpm": "Display BPM",
-        "mgxcId": "MGXC ID",
-        "details": "Details",
-        "file": "File",
-        "resolvedJacketFile": "Actual jacket path",
-        "resolvedBackgroundFile": "Actual background path",
-        "resolvedAudioFile": "Actual audio path"
-      }
-    },
-    "notify": {
-      "missingChart": "Select a chart file first."
     }
   },
   "stage": {

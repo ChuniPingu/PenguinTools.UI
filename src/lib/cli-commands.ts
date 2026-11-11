@@ -1,4 +1,4 @@
-import { changeExtension, musicBuildOutputDir, optionBuildOutputDir } from "@/lib/paths";
+import { changeExtension, optionBuildOutputDir } from "@/lib/paths";
 
 export interface CliProgressOptions {
   noProgress?: boolean;
@@ -41,43 +41,6 @@ export function chartConvertArgs(
   return appendNoProgress(args, options);
 }
 
-export interface MusicBuildSettings {
-  jacketInputPath?: string;
-  workingAudioPath?: string;
-  hcaKey?: string;
-  backgroundPath?: string;
-  stageId?: number;
-  notesFieldLineId?: number;
-  notesFieldLineName?: string;
-  notesFieldLineData?: string | null;
-  songId?: number;
-  title?: string;
-  artist?: string;
-  designer?: string;
-  difficultyId?: number;
-  level?: number;
-  mainBpm?: number;
-  insertBlankMeasure?: boolean;
-  genreId?: number;
-  genreName?: string;
-  weTagId?: number;
-  weTagName?: string;
-  weDifficultyId?: number;
-  isCustomStage?: boolean;
-  stageEntryId?: number;
-  stageEntryName?: string;
-  previewStart?: number;
-  previewStop?: number;
-  manualOffset?: number;
-  initialBpm?: number;
-  initialNumerator?: number;
-  initialDenominator?: number;
-  sortName?: string;
-  unlockEventId?: number;
-  releaseDate?: string;
-  mainTil?: number;
-}
-
 function appendValue(
   args: string[],
   flag: string,
@@ -88,53 +51,6 @@ function appendValue(
 
 function appendFlag(args: string[], flag: string, enabled?: boolean) {
   if (enabled) args.push(flag);
-}
-
-export function musicBuildArgs(
-  chartPath: string,
-  outputDir?: string,
-  settings: MusicBuildSettings = {},
-  options?: CliProgressOptions,
-): string[] {
-  const output = outputDir ?? musicBuildOutputDir(chartPath);
-  const args = ["music", "build", chartPath, output];
-  appendValue(args, "--jacket-input", settings.jacketInputPath);
-  appendValue(args, "--working-audio", settings.workingAudioPath);
-  appendValue(args, "--hca-key", settings.hcaKey);
-  appendValue(args, "--background", settings.backgroundPath);
-  appendValue(args, "--stage-id", settings.stageId);
-  appendValue(args, "--notes-field-line-id", settings.notesFieldLineId);
-  appendValue(args, "--notes-field-line-name", settings.notesFieldLineName);
-  appendValue(args, "--notes-field-line-data", settings.notesFieldLineData);
-  appendValue(args, "--song-id", settings.songId);
-  appendValue(args, "--title", settings.title);
-  appendValue(args, "--artist", settings.artist);
-  appendValue(args, "--designer", settings.designer);
-  appendValue(args, "--difficulty-id", settings.difficultyId);
-  appendValue(args, "--level", settings.level);
-  appendValue(args, "--display-bpm", settings.mainBpm);
-  if (settings.insertBlankMeasure != null) {
-    args.push(settings.insertBlankMeasure ? "--insert-blank-measure" : "--no-insert-blank-measure");
-  }
-  appendValue(args, "--genre-id", settings.genreId);
-  appendValue(args, "--genre-name", settings.genreName);
-  appendValue(args, "--we-tag-id", settings.weTagId);
-  appendValue(args, "--we-tag-name", settings.weTagName);
-  appendValue(args, "--we-difficulty-id", settings.weDifficultyId);
-  appendValue(args, "--custom-stage", settings.isCustomStage);
-  appendValue(args, "--stage-entry-id", settings.stageEntryId);
-  appendValue(args, "--stage-entry-name", settings.stageEntryName);
-  appendValue(args, "--preview-start", settings.previewStart);
-  appendValue(args, "--preview-stop", settings.previewStop);
-  appendValue(args, "--manual-offset", settings.manualOffset);
-  appendValue(args, "--initial-bpm", settings.initialBpm);
-  appendValue(args, "--initial-numerator", settings.initialNumerator);
-  appendValue(args, "--initial-denominator", settings.initialDenominator);
-  appendValue(args, "--sort-name", settings.sortName);
-  appendValue(args, "--unlock-event-id", settings.unlockEventId);
-  appendValue(args, "--release-date", settings.releaseDate);
-  appendValue(args, "--main-til", settings.mainTil);
-  return appendNoProgress(args, options);
 }
 
 export function optionScanArgs(

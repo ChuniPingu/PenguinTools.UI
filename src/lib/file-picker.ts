@@ -11,8 +11,6 @@ export interface FileFilter {
 export const FILE_DIALOG_IDS = {
   "export.option.input": "53a19c2d-e913-4f17-b8f9-51e899000001",
   "export.option.output": "53a19c2d-e913-4f17-b8f9-51e899000002",
-  "convert.song.input": "53a19c2d-e913-4f17-b8f9-51e899000003",
-  "convert.song.output": "53a19c2d-e913-4f17-b8f9-51e899000004",
   "convert.chart.input": "53a19c2d-e913-4f17-b8f9-51e899000005",
   "convert.chart.output": "53a19c2d-e913-4f17-b8f9-51e899000006",
   "convert.audio.input": "53a19c2d-e913-4f17-b8f9-51e899000007",

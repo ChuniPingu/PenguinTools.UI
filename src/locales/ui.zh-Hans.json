@@ -80,7 +80,6 @@
         "build": "正在构建曲包…"
       },
       "music": {
-        "build": "正在构建乐曲…",
         "extract": "正在提取乐曲…"
       },
       "chart": {
@@ -115,7 +114,6 @@
     },
     "pages": {
       "option": "导出曲包",
-      "song": "导出乐曲",
       "chart": "转换谱面",
       "jacket": "转换封面",
       "audio": "转换音源",
@@ -363,7 +361,6 @@
         "build": "构建曲包"
       },
       "music": {
-        "build": "构建乐曲",
         "extract": "提取乐曲"
       },
       "chart": {
@@ -521,7 +518,8 @@
       "weTag": "WORLD'S END 类型",
       "weDifficulty": "WORLD'S END 星级",
       "weDifficultyPlaceholder": "搜索 WORLD'S END 星级…",
-      "weDifficultyEmpty": "未找到 WORLD'S END 星级"
+      "weDifficultyEmpty": "未找到 WORLD'S END 星级",
+      "mgxcId": "MGXC ID"
     },
     "notify": {
       "invalidDrop": "请拖入 MGXC、UGC 或 SUS 谱面文件。",
@@ -550,30 +548,6 @@
     "dialog": {
       "saveTitle": "保存封面 DDS",
       "filterName": "DDS 纹理"
-    }
-  },
-  "song": {
-    "preview": {
-      "notInspected": "未检查",
-      "noMetadata": "无数据",
-      "labels": {
-        "song": "乐曲",
-        "title": "歌曲标题",
-        "artist": "艺术家",
-        "chart": "谱面",
-        "designer": "谱面作者",
-        "difficulty": "难度类别",
-        "displayBpm": "显示 BPM",
-        "mgxcId": "MGXC ID",
-        "details": "详细",
-        "file": "文件",
-        "resolvedJacketFile": "实际封面路径",
-        "resolvedBackgroundFile": "实际背景路径",
-        "resolvedAudioFile": "实际音源路径"
-      }
-    },
-    "notify": {
-      "missingChart": "请先选择谱面文件。"
     }
   },
   "stage": {

@@ -10,7 +10,7 @@ import {
 
 describe("operationFromCliArgs", () => {
   it("maps group and subcommand to dotted operation ids", () => {
-    expect(operationFromCliArgs(["music", "build", "chart.mgxc", "out"])).toBe("music.build");
+    expect(operationFromCliArgs(["option", "build", "chart.mgxc", "out"])).toBe("option.build");
     expect(operationFromCliArgs(["option", "scan", "folder"])).toBe("option.scan");
     expect(operationFromCliArgs(["jacket", "convert-file", "a.png", "out"])).toBe(
       "jacket.convert-file",
@@ -45,18 +45,20 @@ describe("progressSecondaryDetail", () => {
 
 describe("formatProgressStatusLine", () => {
   it("joins operation and detail with a middle dot", () => {
-    expect(formatProgressStatusLine("Building song…", "My Song")).toBe("Building song… · My Song");
+    expect(formatProgressStatusLine("Building option…", "My Song")).toBe(
+      "Building option… · My Song",
+    );
   });
 
   it("returns the operation alone when detail is empty", () => {
-    expect(formatProgressStatusLine("Building song…")).toBe("Building song…");
-    expect(formatProgressStatusLine("Building song…", "")).toBe("Building song…");
+    expect(formatProgressStatusLine("Building option…")).toBe("Building option…");
+    expect(formatProgressStatusLine("Building option…", "")).toBe("Building option…");
   });
 });
 
 describe("progressOperationMessageKey", () => {
   it("builds nested i18n keys from operation ids", () => {
-    expect(progressOperationMessageKey("music.build")).toBe("ui.progress.operations.music.build");
+    expect(progressOperationMessageKey("option.build")).toBe("ui.progress.operations.option.build");
     expect(progressOperationMessageKey("jacket.convert-file")).toBe(
       "ui.progress.operations.jacket.convert-file",
     );
@@ -66,7 +68,7 @@ describe("progressOperationMessageKey", () => {
 describe("resolveProgressOperationLabel", () => {
   it("resolves known operations and falls back for unknown ones", async () => {
     await i18n.changeLanguage("en");
-    expect(resolveProgressOperationLabel("music.build")).toBe("Building song…");
+    expect(resolveProgressOperationLabel("option.build")).toBe("Building option…");
     expect(resolveProgressOperationLabel("option.scan")).toBe("Scanning option…");
     expect(resolveProgressOperationLabel("stage.extract")).toBe("Extracting stage…");
     expect(resolveProgressOperationLabel("not.a.real.op")).toBe("Working…");

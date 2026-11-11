@@ -265,7 +265,7 @@ function ChartInspector({
           metadataHelp="main"
         />
         <InspectorRow label={t("ui.properties.songId.label")} value={chart.songId} mono />
-        <InspectorRow label={t("ui.song.preview.labels.mgxcId")} value={chart.mgxcId} mono />
+        <InspectorRow label={t("ui.chart.preview.mgxcId")} value={chart.mgxcId} mono />
         <InspectorRow label={t("ui.chart.fields.designer")} value={chart.designer} />
         <InspectorRow
           label={t("ui.chart.fields.difficulty")}
