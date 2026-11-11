@@ -43,17 +43,12 @@ const inspected: ChartInspectData = {
   },
 };
 
-describe.each<InspectedPage>(["song", "chart", "extractChart"])("%s inspection", (page) => {
+describe.each<InspectedPage>(["chart", "extractChart"])("%s inspection", (page) => {
   beforeEach(() => useToolPageStore.setState(useToolPageStore.getInitialState(), true));
 
   function select(path: string) {
     const store = useToolPageStore.getState();
-    const patch =
-      page === "song"
-        ? store.patchSong
-        : page === "chart"
-          ? store.patchChart
-          : store.patchExtractChart;
+    const patch = page === "chart" ? store.patchChart : store.patchExtractChart;
     patch({ chartPath: path });
   }
 
@@ -90,8 +85,7 @@ describe.each<InspectedPage>(["song", "chart", "extractChart"])("%s inspection",
     expect(applyChartInspection(page, "a.mgxc", data)).toBe(true);
     expect(useToolPageStore.getState()[page]).toMatchObject({ inspectedPath: "a.mgxc", data });
     expect(canConvertInspectedChart(useToolPageStore.getState()[page].data)).toBe(false);
-    if (page !== "song")
-      expect(useToolPageStore.getState()[page]).toMatchObject({ insertBlankMeasure: false });
+    expect(useToolPageStore.getState()[page]).toMatchObject({ insertBlankMeasure: false });
   });
 
   it("ignores stale successes and failures without overwriting the current source", () => {
@@ -109,13 +103,12 @@ describe.each<InspectedPage>(["song", "chart", "extractChart"])("%s inspection",
       inspectedPath: "a.mgxc",
       data: inspected,
     });
-    if (page !== "song")
-      expect(useToolPageStore.getState()[page]).toMatchObject({
-        songId: "123",
-        designer: "Designer",
-        mainBpm: "180",
-        insertBlankMeasure: true,
-      });
+    expect(useToolPageStore.getState()[page]).toMatchObject({
+      songId: "123",
+      designer: "Designer",
+      mainBpm: "180",
+      insertBlankMeasure: true,
+    });
     applyChartInspection(page, "a.mgxc", null);
     expect(useToolPageStore.getState()[page]).toMatchObject({ inspectedPath: "", data: null });
   });

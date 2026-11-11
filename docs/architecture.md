@@ -18,6 +18,8 @@ The React frontend collects settings and presents results. Tauri owns native fil
 
 ## CLI integration
 
+The option export page builds songs with all discovered difficulties and media. A folder containing one song uses the same workflow. Individual chart and media tools handle standalone conversions.
+
 Changes to CLI arguments, JSON results, diagnostics, or cancellation behavior need matching changes in the frontend bridge and its tests. The upstream [CLI guide](../external/PenguinTools/docs/cli.md#json-output-and-scripts) owns the output protocol; [chart conversion](../external/PenguinTools/docs/chart-conversion.md) owns supported editor versions and round-trip rules.
 
 Backend message catalogs are shared through symlinks; UI catalogs belong to this repository. See [translation setup](development.md#ui-and-translations).

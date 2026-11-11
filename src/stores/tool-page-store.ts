@@ -74,12 +74,6 @@ interface OptionPageState {
   skippedChartCount: number;
 }
 
-interface SongPageState {
-  chartPath: string;
-  inspectedPath: string;
-  data: ChartInspectData | null;
-}
-
 interface ChartPageState {
   chartPath: string;
   inspectedPath: string;
@@ -132,9 +126,9 @@ interface ExtractMusicPageState {
 
 type ExtractChartPageState = ChartPageState & { chartFormat: "mgxc" | "ugc" };
 
-export type InspectedPage = "song" | "chart" | "extractChart";
+export type InspectedPage = "chart" | "extractChart";
 
-function patchInspectedPage<T extends SongPageState>(current: T, patch: Partial<T>): T {
+function patchInspectedPage<T extends ChartPageState>(current: T, patch: Partial<T>): T {
   const changed =
     patch.chartPath !== undefined && patch.chartPath.trim() !== current.chartPath.trim();
   return { ...current, ...patch, ...(changed ? { inspectedPath: "", data: null } : {}) };
@@ -151,7 +145,6 @@ interface ExtractStagePageState {
 
 interface ToolPageStore {
   option: OptionPageState;
-  song: SongPageState;
   chart: ChartPageState;
   jacket: JacketPageState;
   audio: AudioPageState;
@@ -161,7 +154,6 @@ interface ToolPageStore {
   extractAudio: ExtractAudioPageState;
   extractStage: ExtractStagePageState;
   patchOption: (patch: Partial<OptionPageState>) => void;
-  patchSong: (patch: Partial<SongPageState>) => void;
   patchChart: (patch: Partial<ChartPageState>) => void;
   patchJacket: (patch: Partial<JacketPageState>) => void;
   patchAudio: (patch: Partial<AudioPageState>) => void;
@@ -197,11 +189,6 @@ export const useToolPageStore = create<ToolPageStore>((set) => ({
     selection: null,
     chartFilePaths: [],
     skippedChartCount: 0,
-  },
-  song: {
-    chartPath: "",
-    inspectedPath: "",
-    data: null,
   },
   chart: {
     chartPath: "",
@@ -284,7 +271,6 @@ export const useToolPageStore = create<ToolPageStore>((set) => ({
           : {}),
       },
     })),
-  patchSong: (patch) => set((state) => ({ song: patchInspectedPage(state.song, patch) })),
   patchChart: (patch) => set((state) => ({ chart: patchInspectedPage(state.chart, patch) })),
   patchJacket: (patch) => set((state) => ({ jacket: { ...state.jacket, ...patch } })),
   patchAudio: (patch) => set((state) => ({ audio: { ...state.audio, ...patch } })),
@@ -306,16 +292,15 @@ export function applyChartInspection(
 ): boolean {
   const current = useToolPageStore.getState()[page];
   if (current.chartPath.trim() !== requestedPath) return false;
-  const metadata =
-    data && page !== "song"
-      ? {
-          songId: data.chart.songId == null ? "" : String(data.chart.songId),
-          designer: data.chart.designer,
-          difficultyId: data.metadata?.difficultyId ?? 3,
-          mainBpm: String(data.chart.mainBpm),
-          insertBlankMeasure: data.metadata?.bgmEnableBarOffset ?? false,
-        }
-      : {};
+  const metadata = data
+    ? {
+        songId: data.chart.songId == null ? "" : String(data.chart.songId),
+        designer: data.chart.designer,
+        difficultyId: data.metadata?.difficultyId ?? 3,
+        mainBpm: String(data.chart.mainBpm),
+        insertBlankMeasure: data.metadata?.bgmEnableBarOffset ?? false,
+      }
+    : {};
   useToolPageStore.setState({
     [page]: { ...current, ...metadata, inspectedPath: data ? requestedPath : "", data },
   });

@@ -531,13 +531,6 @@ export const ALL_MESSAGE_DIAGNOSTICS: CliDiagnosticPayload[] = [
   },
   {
     severity: "Warning",
-    message: { key: "diag.mg.meta_first_argument_must_int" },
-    path: "charts/sample.ugc",
-    line: 6,
-    time: 68,
-  },
-  {
-    severity: "Warning",
     message: { key: "diag.mg.meta_invalid_date" },
     path: "charts/sample.ugc",
     line: 7,

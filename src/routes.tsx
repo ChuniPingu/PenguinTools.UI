@@ -1,7 +1,6 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import { AppShell } from "@/components/layout/AppShell";
 import { OptionPage } from "@/pages/export/OptionPage";
-import { SongPage } from "@/pages/convert/SongPage";
 import { ChartPage } from "@/pages/convert/ChartPage";
 import { JacketPage } from "@/pages/convert/JacketPage";
 import { AudioPage } from "@/pages/convert/AudioPage";
@@ -26,7 +25,6 @@ export const router = createBrowserRouter([
         children: [
           { index: true, element: <Navigate to="/option" replace /> },
           { path: "option", element: <OptionPage /> },
-          { path: "song", element: <SongPage /> },
           { path: "chart", element: <ChartPage /> },
           { path: "jacket", element: <JacketPage /> },
           { path: "audio", element: <AudioPage /> },

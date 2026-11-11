@@ -5,7 +5,6 @@ import type { CliDiagnosticPayload, CliResponse } from "./cli-types";
 
 export const pageTaskRoutes = {
   option: "/option",
-  song: "/song",
   chart: "/chart",
   jacket: "/jacket",
   audio: "/audio",

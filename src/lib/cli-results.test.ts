@@ -5,7 +5,6 @@ import {
   canConvertInspectedChart,
   parseChartInspectData,
   formatBuildTimestamp,
-  formatChartSummary,
   formatFileChangedMessage,
   formatLocalTime,
   parseCliInfoResult,
@@ -219,24 +218,6 @@ describe("option export helpers", () => {
     const message = formatFileChangedMessage(new Date("2026-07-12T08:30:45"));
     expect(message).toMatch(/modified at \d{2}:\d{2}:\d{2}\./);
     expect(message).toContain("Reload to use the latest version.");
-  });
-
-  it("groups inspected metadata using WPF terminology", () => {
-    const summary = formatChartSummary({
-      songId: 123,
-      title: "Song A",
-      artist: "Artist",
-      designer: "Designer",
-      difficulty: "Master",
-      level: 13,
-      mainBpm: 180,
-      filePath: "C:\\charts\\a.mgxc",
-    });
-
-    expect(summary).toContain("Song\nTitle: Song A");
-    expect(summary).toContain("Chart\nDesigner: Designer");
-    expect(summary).toContain("Display BPM: 180");
-    expect(summary).toContain("Details\nFile: C:\\charts\\a.mgxc");
   });
 });
 

@@ -37,10 +37,6 @@ export function optionBuildOutputDir(inputDir: string): string {
   return joinPath(getDirectory(inputDir), `${getBaseName(inputDir)}-output`);
 }
 
-export function musicBuildOutputDir(chartPath: string): string {
-  return siblingOutputDir(chartPath, "_music");
-}
-
 export function afbExtractOutputDir(inputPath: string): string {
   return siblingOutputDir(inputPath, "_afb");
 }

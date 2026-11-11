@@ -252,14 +252,14 @@ describe("persistent page tasks", () => {
   });
 
   it("refuses a second write on the same page and keeps an export alive when its input changes", async () => {
-    const task = getPageTask("song");
-    const work = task.runCommand(["music", "build", "in", "out"]);
-    await expect(task.runCommand(["music", "build", "in", "out2"])).resolves.toBeNull();
-    task.setSource("another-chart.ugc");
+    const task = getPageTask("option");
+    const work = task.runCommand(["option", "build", "in", "out"]);
+    await expect(task.runCommand(["option", "build", "in", "out2"])).resolves.toBeNull();
+    task.setSource("another-folder");
     expect(launches()).toHaveLength(1);
     expect(task.getSnapshot().status).toBe("running");
     expect(invoke).not.toHaveBeenCalledWith("cancel_cli_task", expect.anything());
-    finish(0, { ...result, operation: "music.build" });
+    finish(0, { ...result, operation: "option.build" });
     await work;
   });
 
@@ -434,7 +434,7 @@ describe("persistent page tasks", () => {
     const ready = vi.fn();
     const idle = waitForCliTasks().then(ready);
     await expect(
-      getPageTask("song").runCommand(["music", "build", "in", "out"]),
+      getPageTask("option").runCommand(["option", "build", "in", "out"]),
     ).resolves.toBeNull();
     finish(0);
     await first;

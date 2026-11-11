@@ -51,7 +51,7 @@ describe.each(["en", "zh-Hans"])("asset diagnostics in %s", (language) => {
     expect(markup).toContain("underline");
     expect(markup).toContain(language === "zh-Hans" ? ">素材库</a>" : ">Assets</a>");
     expect(resolveMessage(message)).toContain(language === "zh-Hans" ? zh : en);
-    expect(resolveMessage(message)).toContain(language === "zh-Hans" ? "素材编号" : "Asset ID");
+    expect(resolveMessage(message)).toContain(language === "zh-Hans" ? "素材 ID" : "Asset ID");
     expect(resolveMessage(message)).not.toContain(catalog);
     expect(message.args?.arg1).toBe(catalog);
   });
