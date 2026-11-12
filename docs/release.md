@@ -4,6 +4,8 @@ Publish the Windows installer, signature, and updater manifest to [PenguinTools.
 
 The UI bundles the pinned PenguinTools source. UI and CLI releases have independent versions and schedules. The CLI repository links to the latest UI release.
 
+[wallbind](https://github.com/ChuniPingu/wallbind) is released separately. The UI exports wall images and bindings through the bundled CLI; users install the DLL in their game using the plugin's installation guide. UI installers and automatic updates do not install the plugin.
+
 ## Prepare a release
 
 1. Pin the intended PenguinTools submodule revision and run the [development checks](development.md#checks).
@@ -14,11 +16,11 @@ The UI bundles the pinned PenguinTools source. UI and CLI releases have independ
    # Use --bump=minor, --bump=major, or --version=X.Y.Z when needed.
    ```
 
-3. Write `docs/changelog/X.Y.Z.md` using the [release notes guide](changelog.md). The bump script updates `package.json`, `src-tauri/Cargo.toml`, and `src-tauri/tauri.conf.json`.
+3. Write `docs/changelog/X.Y.Z.md` using the [release notes guide](changelog.md). The bump script updates `package.json`, `src-tauri/Cargo.toml`, and `src-tauri/tauri.conf.json`. Run `cargo check --manifest-path src-tauri/Cargo.toml` to synchronize the root package version in `src-tauri/Cargo.lock`.
 4. Commit the version, notes, and any submodule update, then push the commit and tag:
 
    ```powershell
-   git add package.json src-tauri/Cargo.toml src-tauri/tauri.conf.json docs/changelog/X.Y.Z.md
+   git add package.json src-tauri/Cargo.toml src-tauri/Cargo.lock src-tauri/tauri.conf.json external/PenguinTools docs/changelog/X.Y.Z.md
    git commit -m "chore(release): prepare UI X.Y.Z"
    git tag -a vX.Y.Z -m "PenguinTools.UI vX.Y.Z"
    git push origin HEAD
