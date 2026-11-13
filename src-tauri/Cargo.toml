@@ -1,6 +1,6 @@
 [package]
 name = "penguin-tools"
-version = "2.5.4"
+version = "3.0.0"
 authors = ["Foahh"]
 license = "MIT"
 edition = "2024"

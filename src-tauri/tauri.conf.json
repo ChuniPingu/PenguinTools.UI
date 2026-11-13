@@ -1,11 +1,11 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "PenguinTools",
-  "version": "2.5.4",
+  "version": "3.0.0",
   "identifier": "com.foahh.penguintools",
   "build": {
     "beforeDevCommand": "bun run dev",
-    "devUrl": "http://localhost:1420",
+    "devUrl": "http://localhost:5173",
     "beforeBuildCommand": "bun run stage:runtime && bun run build",
     "frontendDist": "../dist"
   },
