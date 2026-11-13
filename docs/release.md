@@ -12,7 +12,7 @@ The UI bundles the pinned PenguinTools source. UI and CLI releases have independ
 2. Bump the UI version:
 
    ```powershell
-   vp run bump:version -- --bump=patch
+   vp run bump:version --bump=patch
    # Use --bump=minor, --bump=major, or --version=X.Y.Z when needed.
    ```
 
@@ -72,7 +72,7 @@ Verify the UI release downloads and the S3 updater manifest. The manifest versio
 | `--prerelease`                       | Publish or update a prerelease                                                                        |
 | `--notes-file=path` or `--notes=...` | Override the UI changelog file                                                                        |
 
-Pass flags after `--`, for example `vp run release -- --skip-build --clobber`. Rerun a prepared draft without `--draft` to publish it.
+Pass flags after the script name, for example `vp run release --skip-build --clobber`. Rerun a prepared draft without `--draft` to publish it.
 
 ## Build output
 
