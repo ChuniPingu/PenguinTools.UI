@@ -13,7 +13,7 @@ const publishRoot = join(
   "PenguinTools.CLI",
   "bin",
   "Release",
-  "net10.0",
+  "net11.0",
   "publish",
   publishProfile,
 );
