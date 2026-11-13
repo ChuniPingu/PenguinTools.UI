@@ -122,7 +122,7 @@ fn project_staged_publish_root() -> Option<PathBuf> {
         .join("PenguinTools.CLI")
         .join("bin")
         .join("Release")
-        .join("net10.0")
+        .join("net11.0")
         .join("publish");
 
     for profile in ["WinX64-NativeAOT", "WinX64"] {
